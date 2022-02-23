@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>DeviceSync</title>
+    <meta name="description" content="Cross Platform Multi-Device Clipboard Software">
+    <meta name="" content="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Risque&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Sansation.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background: linear-gradient(to right top, #241f31, #2e243f, #39284d, #462b5b, #542e68), rgba(255,255,255,0);background-repeat: inherit;">
+    <div id="ifLoggedin" style="/*display: none;*//*visibility: hidden;*/">
+        <div class="d-flex d-xl-flex d-xxl-flex justify-content-end align-items-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center" id="center-1" style="padding-bottom: 15px;padding-top: 11px;padding-right: 9px;"><script>
+    function logout() {
+        async function logout() {
+            const url = 'https://devicesync-api.theprotondev.repl.co/logout?username=' + getCookie("username") + '&auth_token=' + getCookie("auth_token")
+            let jsonResult = await (await fetch(url)).json();
+            removeCookies();
+            toast("success", jsonResult.Success)
+            setTimeout(function () {
+                window.location = 'index.html'
+            }, 3000);
+        }
+
+        logout()
+
+    }
+</script>
+<button class="btn btn-grad btn-primary bclassNamead" onclick="logout()" type=onClick">Logout</button>
+</div><h3 id="screenTitle" class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 22px;font-family: 'Share Tech', sans-serif;color: #A441FF;">History</h3>
+<script>
+    function remove_linebreaks(str) {
+        return str.replace( /[\r\n]+/gm, "" );
+    }
+    async function getPastes() {
+        const user = getCookie("username");
+        const auth = getCookie("auth_token");
+        let url = "https://devicesync-api.theprotondev.repl.co/get?history=true&username=" + user + '&auth_token=' + auth
+        // Check result of json, return request result
+        let jsonResult = await (await fetch(url)).json();
+
+        if (jsonResult.Error) {
+            // Get the div and add a child to it
+            let selection = document.getElementById('selections');
+            selection.insertAdjacentHTML('beforeend', '<a class="dropdown-item" style="color: rgb(255,0,0);">No Pastes Found</a></div>');
+        } else { // On success
+            for (const [key, value] of Object.entries(jsonResult)) {
+                let newKey = encodeURI(key);
+                let selection = document.getElementById('selections');
+                selection.insertAdjacentHTML('beforeend', "<a class='dropdown-item' onclick=" + "loadPaste('" + newKey + "')" + ">" + decodeURI(newKey) + "</a>");
+            }
+        }
+    }
+
+    async function loadPaste(pasteTitle) {
+        // Make request and get paste info
+        const user = getCookie("username");
+        const auth = getCookie("auth_token");
+        let url = "https://devicesync-api.theprotondev.repl.co/get?history=true&username=" + user + '&auth_token=' + auth
+        // Check result of json, return request result
+        let jsonResult = await (await fetch(url)).json();
+        for (const [key, value] of Object.entries(jsonResult)) {
+            let newKey = encodeURI(key);
+            if (newKey == pasteTitle) {
+                let paste = remove_linebreaks(value);
+                // Load the paste into the loaded content card
+                let pasteCard = document.getElementById('loadedContent');
+                pasteCard.style = "background: rgba(255,255,255,0);border-style: none; display: block;visibility: visible;";
+                document.getElementById('pasteTitleDisplay').innerText = decodeURI(pasteTitle);
+                document.getElementById('pasteDisplay').innerText = paste;
+            }
+        }
+    }
+
+    window.addEventListener('load', function () {
+        getPastes()
+    })
+</script>
+
+<div id="pasteSelector"
+     class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center"
+     style="padding-bottom: 15px;">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle btn-grad" aria-expanded="false" data-bs-toggle="dropdown"
+                type="button">Select paste
+        </button>
+        <div id="selections" class="dropdown-menu"></div>
+    </div>
+    <div class="dropdown-menu"><a class="dropdown-item" onclick="" style="color: rgb(255,0,0);">No Pastes Found</a>
+    </div>
+
+</div>
+
+        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="loadedContentDiv" style="padding-bottom: 15px;">
+            <div class="card text-center" id="loadedContent" style="background: rgba(255,255,255,0);border-style: none;display: none;visibility: hidden;">
+                <div class="card-body" style="border-style: none;border-color: rgba(33,37,41,0);">
+                    <h4 class="card-title" id="pasteTitleDisplay" style="color: #9c3ff1;">Title</h4>
+                    <p class="card-text" id="pasteDisplay" style="color: rgb(255,255,255);">Null</p>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 16px;"><script>
+    async function copyPaste(){
+        // Make request and get paste info
+        let pasteToGet = document.getElementById('pasteTitleDisplay').innerText
+        const user = getCookie("username");
+        const auth = getCookie("auth_token");
+        let url = "https://devicesync-api.theprotondev.repl.co/get?history=true&username=" + user + '&auth_token=' + auth
+        // Check result of json, return request result
+        let jsonResult = await (await fetch(url)).json();
+        for (const [key, value] of Object.entries(jsonResult)) {
+            if(key == pasteToGet){
+                let paste = value;
+                // Load the paste into the loaded content card
+                await navigator.clipboard.writeText(paste);
+                toast('success', 'Copied "'+paste+'" To Clipboard');
+
+            }
+        }
+    }
+</script>
+
+<button class="btn btn-primary btn-grad" onclick="copyPaste()" type="button" onclick>Copy</button></div>
+                    <div class="d-flex justify-content-center align-items-center"><script>
+    async function deletePaste(){
+        // Make request and get paste info
+        let pasteToGet = document.getElementById('pasteTitleDisplay').innerText
+        const user = getCookie("username");
+        const auth = getCookie("auth_token");
+        const url = 'https://devicesync-api.theprotondev.repl.co/delete?username='+user+'&auth_token='+auth+'&paste_title='+pasteToGet;
+        // Check result of json, return request result
+        let jsonResult = await (await fetch(url)).json();
+        console.log(jsonResult)
+        if(jsonResult.Success) {
+            toast('success', 'Removed "' + pasteToGet + '" From Your Pastes');
+            setTimeout("location.reload(true);", 3000);
+        }
+    }
+</script>
+
+<button class="btn btn-primary btn-grad" onclick="deletePaste()" type="button" onclick>Remove</button></div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="backbtn-1" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;home.html&#39;">Back</button></div>
+    </div>
+    <div id="ifNotloggedin" style="display: none;visibility: hidden;"><h3 class="text-center d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 71px;font-family: 'Share Tech', sans-serif;color: #ff0000;">Hm, You're not supposed to be here<br />Redirecting In 3 Seconds...</h3>
+</div>
+    <footer style="padding-top: 167px;margin-bottom: 110px;"><script>
+    // Wait till the site is loaded, once loaded check api status, also check if user signed in, if not redirect to index page
+    window.addEventListener('load', function () {
+        // Check if the user is signed in
+        isLoggedIn();
+        async function apiStatus() {
+            let response = await fetch('https://devicesync-api.theprotondev.repl.co/status');
+            const data = await response.text();
+            const status_label = document.getElementById("api-status-label");
+            status_label.innerText = data;
+        }
+        apiStatus()
+    })
+</script>
+
+<h3 id="api-status-label" class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-bottom: 500px;font-family: 'Share Tech', sans-serif;color: #A441FF;height: 0px;">API Status: Down | Or Not Accessible</h3>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/protonSnippets.js"></script>
+    <script src="assets/js/toast.min.js"></script>
+</body>
+
+</html>
