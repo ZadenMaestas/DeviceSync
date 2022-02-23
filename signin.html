@@ -53,8 +53,10 @@
          const username = jsonResult.username
          const auth_token = jsonResult.auth_token
          toast('success', "Welcome Back, " + username);
-         document.cookie = "username="+username+'; secure; SameSite=Strict';
-         document.cookie = "auth_token="+auth_token+'; secure SameSite=Strict';
+         var expiryDate = new Date();
+         expiryDate.setMonth(expiryDate.getMonth() + 1);
+         document.cookie = "username="+username+'; SameSite=None; Secure; expires='+expiryDate.toGMTString();
+         document.cookie = "auth_token="+auth_token+';  SameSite=None; Secure; expires='+expiryDate.toGMTString();
          window.location='index.html'
       }
     }
