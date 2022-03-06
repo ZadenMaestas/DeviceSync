@@ -74,6 +74,15 @@ async function uploadScannedText(){
     </div>
     <div id="ifNotloggedin" style="display: none;visibility: hidden;"><h3 class="text-center d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 71px;font-family: 'Share Tech', sans-serif;color: #ff0000;">Hm, You're not supposed to be here<br />Redirecting In 3 Seconds...</h3>
 </div>
+    <footer style="padding-top: 167px;"><script>
+  // Wait till the site is loaded, once loaded check api status, also check if user signed in, if not redirect to index page
+  window.addEventListener('load', function () {
+    // Check if the user is signed in
+    isLoggedIn();
+    isAPIUp();
+  })
+</script>
+</footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/protonSnippets.js"></script>

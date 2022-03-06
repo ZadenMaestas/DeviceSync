@@ -82,7 +82,7 @@ function isLoggedIn() {
             }
         }
         // If the user is not signed in on user pages then redirect them to index
-        else if(page === "upload.html" || page === "history.html" || page === "accountinfo.html" || page === "home.html"){
+        else if(page === "upload.html" || page === "history.html" || page === "accountinfo.html" || page === "home.html" || page === "uploadocr.html"){
             if (isSignedIn) {
                 var div = document.getElementById("ifLoggedin");
                 div.style = 'display:block;visibility:visible;';
