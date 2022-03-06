@@ -7,16 +7,19 @@
     <title>DeviceSync</title>
     <meta name="description" content="Cross Platform Multi-Device Clipboard Software">
     <meta name="" content="">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Risque&amp;display=swap">
     <link rel="stylesheet" href="assets/css/Sansation.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech&amp;display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Drag-Drop-File-Input-Upload.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body style="background: linear-gradient(to right top, #241f31, #2e243f, #39284d, #462b5b, #542e68), rgba(255,255,255,0);background-repeat: inherit;">
-    <div id="ifLoggedin" style="display: none;visibility: hidden;">
+<body>
+    <div id="ifLoggedin" style="/*display: none;*//*visibility: hidden;*/">
         <div class="d-flex d-xl-flex d-xxl-flex justify-content-end align-items-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center" id="center-1" style="padding-bottom: 15px;padding-top: 11px;padding-right: 9px;"><script>
     function logout(){
         async function logout() {
@@ -47,7 +50,7 @@
 <h3 id="welcomeLabel" class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 22px;font-family: 'Share Tech', sans-serif;color: #A441FF;">Welcome Back, </h3>
 
         <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center1" style="padding-bottom: 15px;padding-top: 12px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;upload.html&#39;">Upload</button></div>
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-5" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="">Capture Text From Image (OCR) | Disabled</button></div>
+        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-5" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&quot;uploadocr.html&quot;;">Capture Text From Image (OCR)</button></div>
         <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-4" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;history.html&#39;">History</button></div>
         <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-3" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;accountinfo.html&#39;">Account Info</button></div>
         <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-2" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;changelogs.html&#39;">Changelogs</button></div>
@@ -59,20 +62,12 @@
   window.addEventListener('load', function () {
     // Check if the user is signed in
     isLoggedIn();
-    async function apiStatus() {
-    let response = await fetch('https://devicesync-api.theprotondev.repl.co/status');
-    const data = await response.text();
-    const status_label = document.getElementById("api-status-label");
-    status_label.innerText = data;
-    }
-    apiStatus()
+    isAPIUp();
   })
 </script>
-
-<h3 id="api-status-label" class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-bottom: 500px;font-family: 'Share Tech', sans-serif;color: #A441FF;height: 0px;">API Status: Down | Or Not Accessible</h3>
 </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/protonSnippets.js"></script>
     <script src="assets/js/toast.min.js"></script>
 </body>

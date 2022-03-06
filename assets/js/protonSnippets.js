@@ -1,3 +1,14 @@
+const tx = document.getElementsByTagName("textarea");
+for (let i = 0; i < tx.length; i++) {
+  tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+  tx[i].addEventListener("input", OnInput, false);
+}
+
+function OnInput() {
+  this.style.height = "auto";
+  this.style.height = (this.scrollHeight) + "px";
+}
+
 // Custom toast notification function to shorten boilerplate code
 function toast(notiType, message) {
     // Toast error style
@@ -88,4 +99,23 @@ function isLoggedIn() {
         window.location = 'index.html';
     }
 
+}
+
+async function isAPIUp(){
+  var path = window.location.pathname;
+  var page = path.split("/").pop();
+  // If the API is up but the user is on the api down page, redirect them home
+  let response = await fetch('https://devicesync-api.theprotondev.repl.co/status');
+  const data = await response.text();
+  if(page == "apierror.html"){
+    if (data == "API Status: Up"){
+        window.location = 'index.html';
+      }
+  }
+  // If the API is down, and the user is not on the error page, redirect them to it
+  else{
+    if (data != "API Status: Up"){
+        window.location = 'apierror.html';
+      }
+  }
 }

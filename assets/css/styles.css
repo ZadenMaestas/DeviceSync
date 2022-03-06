@@ -24,3 +24,14 @@
   text-decoration: none;
 }
 
+body {
+  background: linear-gradient(to right top, #241f31, #2e243f, #39284d, #462b5b, #542e68), rgba(255,255,255,0);
+  background-repeat: inherit;
+  background-size: cover;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
