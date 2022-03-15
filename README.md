@@ -4,7 +4,7 @@
 
 --------------------
 ## Theming System
-
+(Coming Soon: On Site Theme Designer)
 # Example themes using rgb and hex
 ## Syntax:
 ### hex_example.json:
