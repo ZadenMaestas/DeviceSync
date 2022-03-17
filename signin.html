@@ -9,20 +9,28 @@
     <meta name="" content="">
     <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
     <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Risque&amp;display=swap">
     <link rel="stylesheet" href="assets/css/Sansation.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/Drag-Drop-File-Input-Upload.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-    <h3 class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 71px;font-family: 'Share Tech', sans-serif;color: #A441FF;">Sign In</h3>
+    <h3 class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 71px;font-family: 'Share Tech', sans-serif;color: var(--accent);">Sign In</h3>
     <p class="text-center d-flex flex-shrink-1 justify-content-center align-items-center" style="color: rgb(255,255,255);font-family: Sansation;"><span style="text-decoration: underline;">Please input your username&nbsp;and password into the boxes below</span></p>
     <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="loginFormDiv" style="padding-bottom: 15px;">
-        <form><input class="form-control" type="text" id="userField" placeholder="Username" style="border-radius: 10px;border: none;padding-bottom: 8px;"><br><input id="passwordField" class="form-control" type="password" placeholder="Password" style="border-radius: 10px;border: none;" /></form>
+        <form><input class="form-control" type="text" id="userField" placeholder="Username" style="border-radius: 10px;border: none;padding-bottom: 8px;" onkeypress="clickPress(event)"><br><script>
+  function clickPress(event) {
+      if (event.keyCode == 13) {
+          signIn()
+      }
+  }
+</script>
+<input id="passwordField" class="form-control" type="password" placeholder="Password" onkeypress="clickPress(event)" style="border-radius: 10px;border: none;" />
+</form>
     </div>
     <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" id="CenterButton1"><script>
     function signIn(){
@@ -31,7 +39,7 @@
         const passwordBox = document.getElementById("passwordField")
         // Return error toast notification if one of the fields or both fields are blank
         if (usernameBox.value == "" || passwordBox.value == ""){
-            toast('error', 'Please enter both a username and a userid');
+            toast('error', 'Please enter both a username and a password');
         }
         else if(passwordBox.value.length < 8){
             toast('error', 'Your password should be exactly 8 characters | You Entered '+ passwordBox.value.length);
@@ -76,8 +84,8 @@
   })
 </script>
 </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/protonSnippets.js"></script>
     <script src="assets/js/toast.min.js"></script>
 </body>

@@ -1,3 +1,11 @@
+:root {
+  --accent: #A441FF;
+  --btn-grad1: #DA22FF;
+  --btn-grad2: #9733EE;
+  --bg-color: #462b5b;
+  --secondary: #ffffff;
+}
+
 .center {
   text-align: center;
   vertical-align: middle;
@@ -5,14 +13,14 @@
 }
 
 .btn-grad {
-  background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
+  background-image: linear-gradient(to right, var(--btn-grad1) 0%, var(--btn-grad2) 51%, var(--btn-grad1) 100%);
 }
 
 .btn-grad {
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;
+  color: var(--secondary);
   border-radius: 10px;
   display: block;
   border: none;
@@ -25,7 +33,7 @@
 }
 
 body {
-  background: linear-gradient(to right top, #241f31, #2e243f, #39284d, #462b5b, #542e68), rgba(255,255,255,0);
+  background: var(--bg-color);
   background-repeat: inherit;
   background-size: cover;
   height: 100%;
