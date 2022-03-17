@@ -1,3 +1,5 @@
+<div align="center">
+
 # DeviceSync
 ## Your clipboard for the modern world
 ### Available at https://theprotondev.github.io/DeviceSyncApp/
@@ -34,4 +36,7 @@
 }
 ```
 # Setting a theme is as simple as creating your own theme.json file and uploading it like so:
+ 
 ![How To Upload Theme Example Gif](https://i.ibb.co/TTjJ9Qc/Implemented-Themes.gif)
+
+</div>
