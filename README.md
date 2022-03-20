@@ -4,6 +4,9 @@
 ## Your clipboard for the modern world
 ### Available at https://theprotondev.github.io/DeviceSyncApp/
 
+## About
+##### DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard that can be extended to their desires if the user is knowledgeable enough
+  
 --------------------
 ## Theming System
 (Coming Soon: On Site Theme Designer)
