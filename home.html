@@ -1,76 +1,363 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>DeviceSync</title>
-    <meta name="description" content="Cross Platform Multi-Device Clipboard Software">
-    <meta name="" content="">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/DeviceSync%20Icon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Risque&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/Sansation.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech&amp;display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Drag-Drop-File-Input-Upload.css">
+    <meta name="theme-color" content="rgb(136,7,255)">
+    <meta name="twitter:title" content="DeviceSync">
+    <meta name="twitter:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png">
+    <meta property="og:type" content="website">
+    <meta name="description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
+that can be extended to their desires if the user is knowledgeable enough">
+    <meta property="og:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png">
+    <meta name="twitter:description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
+that can be extended to their desires if the user is knowledgeable enough">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/splashScreen.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Open%20Sans.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Dark.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+<meta http-equiv="x-ua-compatible" content="IE=10">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <div id="ifLoggedin" style="/*display: none;*//*visibility: hidden;*/">
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-end align-items-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center" id="center-1" style="padding-bottom: 15px;padding-top: 11px;padding-right: 9px;"><script>
-    function logout(){
-        async function logout() {
-            const url = 'https://devicesync-api.theprotondev.repl.co/logout?username=' + getCookie("username") + '&auth_token=' + getCookie("auth_token")
-            let jsonResult = await (await fetch(url)).json();
-            removeCookies();
-            toast("success", jsonResult.Success)
-            setTimeout(function () {
-                window.location = 'index.html'
-            }, 3000);
-        }
+<body style="background-color: rgb(var(--primary));height: 100%;font-family: 'PT Serif', serif;">
+    <nav class="navbar navbar-light navbar-expand-md" style="background-color: rgba(255,255,255,0.19);">
+        <div class="container-fluid">
+            <div id="sideBarButton"><button class="btn" id="sidebar-toggle" type="button" onclick="openNav()"><i class="icon-menu" style="color: var(--text-color);"></i>
 
-        logout()
+<script>
+////////////////////////////////
+// Sidebar Code
+////////////////////////////////
 
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+function closeDivIfNotClosed(event){
+  // Check if open on click
+  let tag = event.target.tagName;
+  if(tag == "BUTTON" || tag == "I"){
+    event.target
+  }
+  if (document.getElementById("sidenav").style.width != "0"){
+    closeNav();
+  }
+}
+
+function openNav() {
+  document.getElementById("sidenav").style.width = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+function closeNav() {
+  document.getElementById("sidenav").style.width = "0";
+  document.body.style.backgroundColor = "white";
+}
+</script>
+</button></div>
+            <div class="d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-left: 69px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clipboard" id="brandIcon" style="font-size: 52px;color: var(--text-color);cursor: pointer;" onclick="window.location=&#39;home.html&#39;;" clickable="True">
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"></path>
+                </svg></div>
+            <div id="userNavDiv" style="/*display: none;*//*visibility: hidden;*/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-box-arrow-left" id="logoutBtn" style="cursor: pointer;font-size: 45px;color: var(--text-color);" onclick="logout();">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+                </svg><span style="cursor: default;">&nbsp; &nbsp; &nbsp; &nbsp;</span><img class="border rounded-circle" id="userPfp" style="width: 45px;height: 45px;border: 1px none !important;cursor: pointer;" src="assets/img/guest.svg" onclick="window.location=&#39;myaccount.html&#39;" loading="eager"></div>
+            <div id="placeholder" style="display: none;visibility: hidden;"></div>
+        </div>
+    </nav><!-- Start: Sidebar --><!-- Credits to: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav_push -->
+
+<script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        document.getElementById("sidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
     }
 </script>
-<button class="btn btn-primary btn-grad" onclick="logout()" type="button">Logout</button>
-</div><script>
-  window.addEventListener('load', function () {
-    var welcomeLabel = document.getElementById('welcomeLabel');
-    var elementText = welcomeLabel.innerText;
-    var username = getCookie("username");
-    elementText = elementText + username;
-     welcomeLabel.innerText = elementText
-  })
-</script>
 
-<h3 id="welcomeLabel" class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 22px;font-family: 'Share Tech', sans-serif;color: var(--accent);">Welcome Back, </h3>
+<style>
+    /* The side navigation menu */
+    .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #111; /* Black*/
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
 
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center1" style="padding-bottom: 15px;padding-top: 12px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;upload.html&#39;">Upload</button></div>
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-4" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;history.html&#39;">History</button></div>
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-3" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;accountinfo.html&#39;">Account Info</button></div>
-        <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-2" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;changelogs.html&#39;">Changelogs</button></div>
-    </div>
-    <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-7" style="padding-bottom: 15px;"><button class="btn btn-primary btn-grad" type="button" onclick="window.location=&#39;themes.html&#39;">Themes</button></div>
-    <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-5" style="padding-bottom: 15px;"><button class="btn btn-primary disabled btn-grad" type="button" onclick="//window.location=&quot;uploadocr.html&quot;;" disabled="">Capture Text From Image (OCR)</button></div>
-    <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="center-6" style="padding-bottom: 15px;"><a href="https://github.com/TheProtonDev/DeviceSyncApp/issues/1" target="_blank">Why is OCR Disabled?</a></div>
-    <div id="ifNotloggedin" style="display: none;visibility: hidden;"><h3 class="text-center d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center" style="padding-top: 71px;font-family: 'Share Tech', sans-serif;color: #ff0000;">Hm, You're not supposed to be here<br />Redirecting In 3 Seconds...</h3>
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: var(--formatted-primary);
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    #main {
+        transition: margin-left 0.5s;
+        padding: 20px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and(max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+</style>
+
+<div id="sidenav" class="sidenav">
+    <a id="closeLink" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a id="homeLink" href="home.html">Home</a>
+    <a id="homeLink" href="home.html?div=history">My Pastes</a>
+    <a id="homeLink" href="home.html?div=upload">Upload</a>
+    <!--<a class="disabled" id="ocrLink" href="home.html?div=ocr">Image To Text</a>-->
+    <a id="accountLink" href="myaccount.html">My Account</a>
+    <a id="changelogs" href="changelogs.html">Changelogs</a>
 </div>
-    <footer style="padding-top: 167px;"><script>
-  // Wait till the site is loaded, once loaded check api status, also check if user signed in, if not redirect to index page
-  window.addEventListener('load', function () {
-    // Check if the user is signed in
-    checkForTheme();
-    isAPIUp()
-    isLoggedIn();
-  })
+<!-- End: Sidebar -->
+    <div id="main" style="height: initial;">
+        <!-- Start: Navigation -->
+        <div style="background-color: rgb(var(--primary));padding-top: 30px;padding-bottom: 30px;border-style: none;">
+            <!-- Start: toggle --><script>
+  // Code that gets triggered when a new tab is selected
+  function toggle(toToggle) {
+    // Check if this is already activated
+    let classes = document.getElementById(toToggle);
+    // Check if DOM objects were found under the id input
+    if (classes != null) {
+      // If object has a second className, that second className would likely be active
+      if (classes.classList[1] == null) {
+        // When toggling a new tab make sure that no other tabs are toggled
+        let existingToggled = document.getElementsByClassName("active");
+        // Check HTMLCollection object
+        if (existingToggled.length != 0) {
+          if (existingToggled[0].id == "newPaste") {
+            hideElement("newPasteDiv");
+          }
+          if (existingToggled[0].id == "myPastes") {
+            hideElement("myPastesDiv");
+          }
+          // Disabled for now
+          if (existingToggled[0].id == "ocr") {
+            hideElement("ocrDiv");
+          }
+          existingToggled[0].classList.remove("active");
+        }
+        classes.classList.add("active");
+        // If successfully activated link, toggle div for this link
+        if (toToggle == "newPaste") {
+          showElement("newPasteDiv");
+        }
+        if (toToggle == "myPastes") {
+          showElement("myPastesDiv");
+          checkPastes();
+        }
+        if (toToggle == "ocr") {
+          showElement("ocrDiv");
+        }
+      }
+    }
+    else{
+      alert(`Invalid Div Selected\n\nYou selected: ${toToggle}`)
+    }
+  }
 </script>
-</footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- End: toggle -->
+            <ul class="nav nav-tabs d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" id="nav">
+                <li class="nav-item"><a class="nav-link" id="myPastes" onclick="toggle(&#39;myPastes&#39;)" style="cursor: pointer;color: var(--text-color);">My Pastes</a></li>
+                <li class="nav-item"><a class="nav-link active" id="newPaste" onclick="toggle(&#39;newPaste&#39;)" style="cursor: pointer;color: var(--text-color);">New Paste</a></li>
+                <li class="nav-item"></li>
+            </ul>
+        </div><!-- End: Navigation -->
+        <div id="newPasteDiv" style="/*visibility: hidden;*//*display: none;*/padding-bottom: 700px;background: rgb(var(--primary));">
+            <h5 class="d-flex justify-content-center align-items-center" style="font-family: ABeeZee, sans-serif;font-weight: bold;text-align: center;color: var(--text-color);padding-bottom: 64px;">New Paste</h5>
+            <div class="input-group w-100" id="titleGroup" style="cursor: text;background: var(--secondary);border-radius: 25px;" onclick="document.getElementById(&quot;titleField&quot;).focus();"><span class="input-group-text" style="background: var(--secondary);border-style: none;border-radius: 25px;"><i class="material-icons" style="color: var(--text-color);font-size: 25px;">title</i></span><input class="form-control" type="text" id="titleField" style="border-radius: 25px;background: var(--secondary);color: var(--text-color);font-family: 'PT Serif', serif;border-style: none;" placeholder="Title" onkeypress=""></div>
+            <div style="padding-bottom: 12px;"></div>
+            <div class="input-group w-100" id="contentGroup" style="cursor: text;padding-bottom: 13px;background: var(--secondary);border-radius: 25px;padding-top: 13px;color: rgb(33, 37, 41);" onclick="document.getElementById(&quot;contentField&quot;).focus();"><span class="input-group-text" style="background: var(--secondary);border-style: none;border-radius: 25px;"><i class="material-icons" style="color: var(--text-color);font-size: 25px;">short_text</i></span><textarea class="form-control form-control-sm" id="contentField" style="resize: vertical;max-width: inherit;padding: 0px;margin: 0px;color: var(--text-color);background: var(--secondary);border-style: inherit;border-radius: 12px;" placeholder="Paste Content"></textarea></div>
+            <div class="d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center" style="padding-top: 12px;">
+                <!-- Start: uploadFunction --><script>
+  // Get the input field
+  var titleField = document.getElementById("titleField");
+  var contentField = document.getElementById("contentField");
+
+  // Execute a function when the user releases a key on the keyboard
+  titleField.addEventListener("keydown", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+
+    if (event.keyCode === 13 && !event.shiftKey) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("uploadBtn").click();
+    }
+  });
+  contentField.addEventListener("keydown", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13 && !event.shiftKey) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("uploadBtn").click();
+    }
+  });
+
+  async function upload() {
+    // Check if both fields are filled in
+    const pasteTitle = document.getElementById("titleField");
+    const paste = document.getElementById("contentField");
+    // Return error toast notification if one of the fields or both fields are blank
+    if (pasteTitle.value == "" || paste.value == "") {
+      toast("error", "Please enter both a paste title and a paste");
+    } else {
+      toast("prompt", "Processing Data");
+      const username = getCookie("username");
+      const auth_token = getCookie("auth_token");
+      let url =
+        "https://devicesync-api.theprotondev.repl.co/upload?username=" +
+        username +
+        "&auth_token=" +
+        auth_token +
+        "&paste_title=" +
+        encodeURI(pasteTitle.value) +
+        "&paste=" +
+        encodeURI(paste.value);
+      // Check result of json, return request result
+      let jsonResult = await (await fetch(url)).json();
+      if (jsonResult.Error) {
+        toast("error", jsonResult.Error);
+      } else {
+        // On success
+        if (jsonResult.Success) {
+          toast("success", "Success: " + jsonResult.Success);
+          document.getElementById("titleField").value = "";
+          document.getElementById("contentField").value = "";
+        }
+      }
+    }
+  }
+</script><!-- End: uploadFunction --><button class="btn" id="uploadBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Upload</button>
+            </div>
+        </div>
+        <div id="myPastesDiv" style="visibility: hidden;display: none;padding-bottom: 700px;background: rgb(var(--primary));">
+            <h5 class="d-flex justify-content-center align-items-center" style="font-family: ABeeZee, sans-serif;font-weight: bold;text-align: center;color: var(--text-color);padding-bottom: 64px;">My Pastes</h5>
+            <div class="input-group w-100" id="searchGroup" style="cursor: text;background: var(--secondary);border-radius: 25px;color: var(--text-color);" onclick="document.getElementById(&quot;titleField&quot;).focus();"><span class="input-group-text" style="background: var(--secondary);border-style: none;border-radius: 25px;color: var(--text-color);"><i class="material-icons" id="searchBtn" style="color: var(--text-color);font-size: 25px;cursor: pointer;" onclick="searchPastes()">search</i></span><input class="form-control" type="text" id="searchField" style="border-radius: 25px;background: var(--secondary);color: var(--text-color);font-family: 'PT Serif', serif;border-style: none;" placeholder="Search Pastes"></div>
+            <div class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center" style="padding-top: 16px;"><button class="btn" id="reloadBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="checkPastes()">Reload Pastes</button></div>
+            <div id="results" style="padding-bottom: 12px;"></div>
+        </div>
+        <div id="ocrDiv" style="visibility: hidden;display: none;padding-bottom: 700px;background: rgb(var(--primary));">
+            <h5 class="d-flex justify-content-center align-items-center" style="font-family: ABeeZee, sans-serif;font-weight: bold;text-align: center;color: var(--text-color);padding-bottom: 64px;">OCR Upload</h5>
+            <div class="input-group w-100" id="titleDisplay" style="cursor: text;background: var(--secondary);border-radius: 25px;color: var(--text-color);" onclick="document.getElementById(&quot;titleField&quot;).focus();"><span class="input-group-text" style="background: var(--secondary);border-style: none;border-radius: 25px;"><i class="material-icons" style="color: var(--text-color);font-size: 25px;">title</i></span></div>
+            <div style="padding-bottom: 12px;"></div>
+            <div class="input-group w-100" id="contentDisplay" style="cursor: text;padding-bottom: 13px;background: var(--secondary);border-radius: 25px;padding-top: 13px;" onclick="document.getElementById(&quot;contentField&quot;).focus();"><span class="input-group-text" style="background: var(--secondary);border-style: none;border-radius: 25px;"><i class="material-icons" style="color: var(--text-color);font-size: 25px;">short_text</i></span></div>
+            <div class="d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center" style="padding-top: 12px;"><button class="btn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Upload</button></div>
+        </div>
+    </div><!-- Start: Footer Dark -->
+    <footer class="footer-dark" style="background: var(--secondary);">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex d-sm-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
+                    <p style="text-align: center;"><a href="https://github.com/TheProtonDev/DeviceSyncApp" target="_blank">DeviceSync</a>&nbsp;is an application made by&nbsp;<a href="https://github.com/TheProtonDev" target="_blank">TheProtonDev</a>&nbsp;which aims to provide the userbase with a cross platform, synchronized clipboard<br>that can be extended to their desires if the user is knowledgeable enough</p>
+                </div>
+            </div><!-- Start: Copyright -->
+            <p style="color: #b8aeae;text-align: center;"><strong><em>Credits:</em></strong><br><a href="https://github.com/TheProtonDev" target="_blank"><em>TheProtonDev</em></a><em> © 2022</em></p><!-- End: Copyright -->
+        </div>
+    </footer><!-- End: Footer Dark -->
+    <!-- Start: pageChecks --><script>
+  // When the window is loaded do the following
+  window.onload = async function () {
+    // Check if user is logged in
+    isLoggedIn();
+    // Add a even listener for the enter key on the searchbar
+    document.getElementById('searchField').addEventListener("keypress", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      document.getElementById("searchBtn").click();
+    }});
+    const params = new URLSearchParams(window.location.search);
+    // Check the parameters for valid
+    const title = params.get("title");
+    const content = params.get("content");
+    if (title) {
+      document.getElementById("titleField").value = title;
+    }
+    if (content) {
+      document.getElementById("contentField").value = content;
+    }
+    // Check if div arguments were input
+    const selectedDiv = params.get("div");
+    if (selectedDiv) {
+      // Check what div was input if one was input
+      if (selectedDiv == "upload") {
+        showElement("newPasteDiv");
+        hideElement("ocrDiv");
+        hideElement("myPastesDiv");
+        toggle("newPaste");
+      } else if (selectedDiv == "history") {
+        showElement("newPasteDiv");
+        hideElement("ocrDiv");
+        hideElement("myPastesDiv");
+        toggle("myPastes");
+        checkPastes();
+      } else if (selectedDiv == "ocr") {
+        hideElement("newPasteDiv");
+        showElement("ocrDiv");
+        hideElement("myPastesDiv");
+        toggle("ocr");
+      }
+    }
+  };
+</script>
+<!-- End: pageChecks -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bcrypt.min.js"></script>
+    <script src="assets/js/clipboard.min.js"></script>
+    <script src="assets/js/jscolor.min.js"></script>
     <script src="assets/js/protonSnippets.js"></script>
     <script src="assets/js/toast.min.js"></script>
 </body>
