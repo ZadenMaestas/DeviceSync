@@ -436,9 +436,8 @@ async function searchPastes() {
       let paste_title = decodeURI(key);
       let paste = decodeURI(value);
       // Clear previous contents of div
-      let shareUrl =
-        window.location.hostname + "/share.html?content=" + encodeURI(value);
-      let rawUrl = "/share.html?content=" + encodeURI(value);
+      let shareUrl = "https://theprotondev.github.io/DeviceSyncApp/share.html?content=" + encodeURI(value);
+      let rawUrl = "https://theprotondev.github.io/DeviceSyncApp/share.html?content=" + encodeURI(value);
       document
         .getElementById("results")
         .insertAdjacentHTML(
@@ -447,9 +446,9 @@ async function searchPastes() {
             paste_title +
             "</h4><p class='card-text'>" +
             paste.replace(/\n/g, "<br>") +
-            "</p><div><button id='copyBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"ClipboardJS.copy('" +
+            "</p><div><button id='copyBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"ClipboardJS.copy(`" +
             paste +
-            "');toast('success', 'Copied Paste To Clipboard');\"><i class='fa fa-copy'></i>  Copy</button><span style='cursor: default;'>       </span><button id='rawBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"window.open('" +
+            "`);toast('success', 'Copied Paste To Clipboard');\"><i class='fa fa-copy'></i>  Copy</button><span style='cursor: default;'>       </span><button id='rawBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"window.open('" +
             rawUrl +
             "', 'blank');\"><i class='fa fa-paperclip '></i>   Raw</button><span style='cursor: default;'>       </span><button id='shareBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"shareRaw('" +
             shareUrl +
@@ -489,9 +488,8 @@ async function checkPastes() {
       let paste_title = decodeURI(key);
       let paste = decodeURI(value);
       // Clear previous contents of div
-      let shareUrl =
-        window.location.hostname + "/share.html?content=" + encodeURI(value);
-      let rawUrl = "/share.html?content=" + encodeURI(value);
+      let shareUrl = "https://theprotondev.github.io/DeviceSyncApp/share.html?content=" + encodeURI(value);
+      let rawUrl = "https://theprotondev.github.io/DeviceSyncApp/share.html?content=" + encodeURI(value);
       document
         .getElementById("results")
         .insertAdjacentHTML(
@@ -500,9 +498,9 @@ async function checkPastes() {
             paste_title +
             "</h4><p class='card-text'>" +
             paste.replace(/\n/g, "<br>") +
-            "</p><div><button id='copyBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"ClipboardJS.copy('" +
+            "</p><div><button id='copyBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"ClipboardJS.copy(`" +
             paste +
-            "');toast('success', 'Copied Paste To Clipboard');\"><i class='fa fa-copy'></i>  Copy</button><span style='cursor: default;'>       </span><button id='rawBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"window.open('" +
+            "`);toast('success', 'Copied Paste To Clipboard');\"><i class='fa fa-copy'></i>  Copy</button><span style='cursor: default;'>       </span><button id='rawBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"window.open('" +
             rawUrl +
             "', 'blank');\"><i class='fa fa-paperclip'></i>   Raw</button><span style='cursor: default;'>       </span><button id='shareBtn' class='btn' type='button' style='color: var(--text-color);background: var(--secondary);border-radius: 25px;' onclick=\"shareRaw('" +
             shareUrl +
@@ -517,7 +515,7 @@ async function checkPastes() {
 async function shareRaw(rawUrl) {
   if (navigator.share) {
     navigator
-      .share({ url: rawUrl })
+      .share({ text: rawUrl })
       .then(() => console.log("Successful share"))
       .catch((error) => console.log("Error sharing:", error));
   } else {
