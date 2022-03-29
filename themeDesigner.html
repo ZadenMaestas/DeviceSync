@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" style="height: 100%;">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>DeviceSync</title>
-    <meta name="theme-color" content="rgb(136,7,255)">
-    <meta name="twitter:title" content="DeviceSync">
-    <meta name="twitter:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png">
-    <meta property="og:type" content="website">
-    <meta name="description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
-that can be extended to their desires if the user is knowledgeable enough">
-    <meta property="og:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png">
-    <meta name="twitter:description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
-that can be extended to their desires if the user is knowledgeable enough">
-    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png">
-    <link rel="icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/splashScreen.png">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/Open%20Sans.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="assets/css/Footer-Dark.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-<meta http-equiv="x-ua-compatible" content="IE=10">
+<!DOCTYPE html><html lang="en" style="height: 100%;"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><title>DeviceSync</title><meta name="theme-color" content="rgb(136,7,255)"><meta name="twitter:title" content="DeviceSync"><meta name="twitter:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png"><meta property="og:type" content="website"><meta name="description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
+that can be extended to their desires if the user is knowledgeable enough"><meta property="og:image" content="https://theprotondev.github.io/DeviceSyncApp/assets/img/icon.png"><meta name="twitter:description" content="DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard
+that can be extended to their desires if the user is knowledgeable enough"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png"><link rel="icon" type="image/png" sizes="180x180" href="assets/img/iosSplash.png"><link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon.png"><link rel="icon" type="image/png" sizes="512x512" href="assets/img/splashScreen.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif&amp;display=swap"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"><link rel="stylesheet" href="assets/css/styles.min.css"><meta http-equiv="x-ua-compatible" content="IE=10">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body style="height: 100%;font-family: 'PT Serif', serif;background: var(--formatted-primary);">
-    <nav class="navbar navbar-light navbar-expand-md" style="background: rgba(255,255,255,0.19);">
-        <div class="container-fluid">
-            <div id="sideBarButton"><button class="btn" id="sidebar-toggle" type="button" style="color: var(--text-color);" onclick="openNav()"><i class="icon-menu" style="border-color: var(--secondary);"></i>
+</head><body style="height: 100%;font-family: 'PT Serif', serif;background: var(--formatted-primary);"><nav class="navbar navbar-light navbar-expand-md" style="background: rgba(255,255,255,0.19);"><div class="container-fluid"><div id="sideBarButton"><button class="btn" id="sidebar-toggle" type="button" style="color: var(--text-color);" onclick="openNav()"><i class="icon-menu" style="border-color: var(--secondary);"></i>
 
 <script>
 ////////////////////////////////
@@ -67,18 +32,13 @@ function closeNav() {
   document.body.style.backgroundColor = "white";
 }
 </script>
-</button></div>
-            <div class="d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-left: 69px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clipboard" id="brandIcon" style="font-size: 52px;color: var(--text-color);cursor: pointer;" onclick="window.location=&#39;index.html&#39;;" clickable="True">
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"></path>
-                </svg></div>
-            <div id="userNavDiv" style="/*display: none;*//*visibility: hidden;*/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-box-arrow-left" id="logoutBtn" style="cursor: pointer;font-size: 45px;color: var(--text-color);" onclick="logout();">
-                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
-                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
-                </svg><span style="cursor: default;">&nbsp; &nbsp; &nbsp; &nbsp;</span><img class="border rounded-circle" id="userPfp" style="width: 45px;height: 45px;border: 1px none !important;cursor: pointer;" src="assets/img/guest.svg" onclick="window.location=&#39;myaccount.html&#39;" loading="eager"></div>
-            <div id="placeholder" style="display: none;visibility: hidden;"></div>
-        </div>
-    </nav><!-- Start: Sidebar --><!-- Credits to: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav_push -->
+</button></div><div class="d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-left: 69px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clipboard" id="brandIcon" style="font-size: 52px;color: var(--text-color);cursor: pointer;" onclick="window.location=&#39;index.html&#39;;" clickable="True">
+  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
+  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"></path>
+</svg></div><div id="userNavDiv" style="/*display: none;*//*visibility: hidden;*/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-box-arrow-left" id="logoutBtn" style="cursor: pointer;font-size: 45px;color: var(--text-color);" onclick="logout();">
+  <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
+  <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+</svg><span style="cursor: default;">&nbsp; &nbsp; &nbsp; &nbsp;</span><img class="border rounded-circle" id="userPfp" style="width: 45px;height: 45px;border: 1px none !important;cursor: pointer;" src="assets/img/guest.svg" onclick="window.location=&#39;myaccount.html&#39;" loading="eager"></div><div id="placeholder" style="display: none;visibility: hidden;"></div></div></nav><!-- Start: Sidebar --><!-- Credits to: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav_push -->
 
 <script>
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -159,56 +119,11 @@ function closeNav() {
     <a id="accountLink" href="myaccount.html">My Account</a>
     <a id="changelogs" href="changelogs.html">Changelogs</a>
 </div>
-<!-- End: Sidebar -->
-    <div id="main" style="height: initial;">
-        <div id="themeDesignerDiv" style="/*visibility: hidden;*//*display: none;*/padding-bottom: 700px;background: rgb(var(--primary));">
-            <h5 class="d-flex justify-content-center align-items-center" style="font-family: ABeeZee, sans-serif;font-weight: bold;text-align: center;color: var(--text-color);padding-bottom: 64px;padding-top: 48px;">Theme Designer</h5>
-            <h5 class="text-center" style="color: var(--text-color);">Primary Color:&nbsp;&nbsp;</h5>
-            <p class="text-center" style="color: var(--text-color);font-size: 14px;">The background of the entire site</p>
-            <div class="d-flex justify-content-center align-items-center" id="accentDiv" style="margin-bottom: 15px;">
-                <!-- Start: primaryColorPicker --><input class="inputColor" value="#8807ff" data-jscolor="{onInput: 'setVar(\'primary\', this)'}"></h5><!-- End: primaryColorPicker -->
-            </div>
-            <h5 class="text-center" style="color: var(--text-color);">Secondary Color:&nbsp;&nbsp;</h5>
-            <p class="text-center" style="color: var(--text-color);font-size: 14px;">The background of buttons, text fields,<br>forms and footers.</p>
-            <div class="d-flex justify-content-center align-items-center" id="secondaryColorPickerDiv" style="margin-bottom: 15px;">
-                <!-- Start: secondaryColorPicker --><input class="inputColor" value="#282d32" data-jscolor="{onInput: 'setVar(\'secondary\', this)'}"></h5><!-- End: secondaryColorPicker -->
-            </div>
-            <h5 class="text-center" style="color: var(--text-color);">Input Text Color:&nbsp;&nbsp;</h5>
-            <p class="text-center" style="color: var(--text-color);font-size: 14px;">I'd recommend leaving this is as, white works for most color combinations as this variable.</p>
-            <div class="d-flex justify-content-center align-items-center" id="textColorPickerDiv" style="margin-bottom: 15px;">
-                <!-- Start: textColorPicker --><input class="inputColor" value="#ffffff" data-jscolor="{onInput: 'setVar(\'text-color\', this)'}"></h5><!-- End: textColorPicker -->
-            </div>
-            <div class="d-flex justify-content-center align-items-center" id="accentDiv-1" style="margin-bottom: 15px;border-style: none;"></div>
-            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="setThemeBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="saveMadeChanges()">Set Theme</button></div>
-            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="defaultsBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Reset To Defaults</button></div>
-            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="saveThemeBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Save Theme To PC</button></div>
-        </div>
-    </div><!-- Start: Footer Dark -->
-    <footer class="footer-dark" style="background: var(--secondary);">
-        <div class="container">
-            <div class="row">
-                <div class="col d-flex d-sm-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-                    <p style="text-align: center;"><a href="https://github.com/TheProtonDev/DeviceSyncApp" target="_blank">DeviceSync</a>&nbsp;is an application made by&nbsp;<a href="https://github.com/TheProtonDev" target="_blank">TheProtonDev</a>&nbsp;which aims to provide the userbase with a cross platform, synchronized clipboard<br>that can be extended to their desires if the user is knowledgeable enough</p>
-                </div>
-            </div><!-- Start: Copyright -->
-            <p style="color: #b8aeae;text-align: center;"><strong><em>Credits:</em></strong><br><a href="https://github.com/TheProtonDev" target="_blank"><em>TheProtonDev</em></a><em> © 2022</em></p><!-- End: Copyright -->
-        </div>
-    </footer><!-- End: Footer Dark -->
-    <!-- Start: pageChecks --><script>
+<!-- End: Sidebar --><div id="main" style="height: initial;"><div id="themeDesignerDiv" style="/*visibility: hidden;*//*display: none;*/padding-bottom: 700px;background: rgb(var(--primary));"><h5 class="d-flex justify-content-center align-items-center" style="font-family: ABeeZee, sans-serif;font-weight: bold;text-align: center;color: var(--text-color);padding-bottom: 64px;padding-top: 48px;">Theme Designer</h5><h5 class="text-center" style="color: var(--text-color);">Primary Color:&nbsp;&nbsp;</h5><p class="text-center" style="color: var(--text-color);font-size: 14px;">The background of the entire site</p><div class="d-flex justify-content-center align-items-center" id="accentDiv" style="margin-bottom: 15px;"><!-- Start: primaryColorPicker --><input class="inputColor" value="#8807ff" data-jscolor="{onInput: 'setVar(\'primary\', this)'}"></h5><!-- End: primaryColorPicker --></div><h5 class="text-center" style="color: var(--text-color);">Secondary Color:&nbsp;&nbsp;</h5><p class="text-center" style="color: var(--text-color);font-size: 14px;">The background of buttons, text fields,<br>forms and footers.</p><div class="d-flex justify-content-center align-items-center" id="secondaryColorPickerDiv" style="margin-bottom: 15px;"><!-- Start: secondaryColorPicker --><input class="inputColor" value="#282d32" data-jscolor="{onInput: 'setVar(\'secondary\', this)'}"></h5><!-- End: secondaryColorPicker --></div><h5 class="text-center" style="color: var(--text-color);">Input Text Color:&nbsp;&nbsp;</h5><p class="text-center" style="color: var(--text-color);font-size: 14px;">I'd recommend leaving this is as, white works for most color combinations as this variable.</p><div class="d-flex justify-content-center align-items-center" id="textColorPickerDiv" style="margin-bottom: 15px;"><!-- Start: textColorPicker --><input class="inputColor" value="#ffffff" data-jscolor="{onInput: 'setVar(\'text-color\', this)'}"></h5><!-- End: textColorPicker --></div><div class="d-flex justify-content-center align-items-center" id="accentDiv-1" style="margin-bottom: 15px;border-style: none;"></div><div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="setThemeBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="saveMadeChanges()">Set Theme</button></div><div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="defaultsBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Reset To Defaults</button></div><div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px;"><button class="btn" id="saveThemeBtn" type="button" style="background: var(--secondary);color: var(--text-color);border-radius: 25px;" onclick="upload()">Save Theme To PC</button></div></div></div><!-- Start: Footer Dark --><footer class="footer-dark" style="background: var(--secondary);"><div class="container"><div class="row"><div class="col d-flex d-sm-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center"><p style="text-align: center;"><a href="https://github.com/TheProtonDev/DeviceSyncApp" target="_blank">DeviceSync</a>&nbsp;is an application made by&nbsp;<a href="https://github.com/TheProtonDev" target="_blank">TheProtonDev</a>&nbsp;which aims to provide the userbase with a cross platform, synchronized clipboard<br>that can be extended to their desires if the user is knowledgeable enough</p></div></div><!-- Start: Copyright --><p style="color: #b8aeae;text-align: center;"><strong><em>Credits:</em></strong><br><a href="https://github.com/TheProtonDev" target="_blank"><em>TheProtonDev</em></a><em> © 2022</em></p><!-- End: Copyright --></div></footer><!-- End: Footer Dark --><!-- Start: pageChecks --><script>
   // When the window is loaded do the following
   window.onload = async function () {
     // Check if user is logged in
     isLoggedIn();
   };
 </script>
-<!-- End: pageChecks -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bcrypt.min.js"></script>
-    <script src="assets/js/clipboard.min.js"></script>
-    <script src="assets/js/jscolor.min.js"></script>
-    <script src="assets/js/protonSnippets.js"></script>
-    <script src="assets/js/toast.min.js"></script>
-</body>
-
-</html>
+<!-- End: pageChecks --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script><script src="assets/js/script.min.js"></script></body></html>
