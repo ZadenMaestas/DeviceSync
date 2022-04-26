@@ -1,6 +1,6 @@
 <div align="center">
 
-# DeviceSync
+# DeviceSync | No Longer In Active Development, I will add features when I feel like coming back to this project, but for the meanwhile, I'm going to dive into more long term projects
 ## Your clipboard for the modern world
 ### Available at https://theprotondev.github.io/DeviceSyncApp/
   
