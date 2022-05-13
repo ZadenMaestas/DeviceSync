@@ -3,7 +3,7 @@
 # DeviceSync | No Longer In Active Development, I will add features when I feel like coming back to this project, but for the meanwhile, I'm going to dive into more long term projects
 ## Your clipboard for the modern world
 ### Available at https://theprotondev.github.io/DeviceSyncApp/
-  
+##### _Looking for the API repository?: https://github.com/TheProtonDev/devicesync-api_  
 ## About
 ##### DeviceSync is an application made by TheProtonDev which aims to provide the userbase with a cross platform, synchronized clipboard that can be extended to their desires if the user is knowledgeable enough
 
