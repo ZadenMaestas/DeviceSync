@@ -16,7 +16,8 @@ function createUserTableIfNotExists($db): void
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       username TEXT, 
       password TEXT,
-      sessions LONGTEXT
+      sessions LONGTEXT,
+      pastes LONGTEXT
     )");
 }
 

@@ -48,6 +48,12 @@ body.dark {
     resize: none;
 }
 
+.noteCardInput:focus {
+    outline: solid 1px var(--color-primary) !important;
+    resize: none;
+}
+
+
 .textfield {
     background-color: var(--bg-color);
     color: var(--font-color);
