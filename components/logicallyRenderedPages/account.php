@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="https://unpkg.com/chota@latest">
     <!--
     darkmode.js checks the theme settings for the browser and sets dark mode accordingly-->
-    <script defer src="assets/js/darkmode.js"></script>
-    <script src="assets/js/utils.js"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="../../assets/js/darkmode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"
+            integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
 <div class="container">
@@ -21,22 +23,19 @@
                 <a class="active" href="myAccount.php">Account</a>
             </div>
         </div>
-        <div id="logoutButtonContainer" class="nav-right">
-            <details class="dropdown">
-                <summary class="button outline primary">My Profile</summary>
-                <div class="card profileCard">
-                    <p><a href="/api/v2/logout.php" class="text-error">Logout</a></p>
-                </div>
-            </details>
+        <div id="logoutDiv" class="nav-right">
+            <script>isSignedIn()</script>
         </div>
     </nav>
     <div class="spacer"></div>
     <div class="spacer"></div>
-    <form action="api/v2/login.php" method="POST">
-        <fieldset id="forms__input">
-            <legend>Sign In</legend>
+    <h2 style="text-align: center;" class="hero-header">Account Management Portal Coming Soon!</h2>
+    <!--
+    <form action="../login.php" method="post">
+        <fieldset id="signInForm">
+            <legend>My Account</legend>
             <p>
-                <label for="usernameInput">Username</label>
+                <label for="usernameInput">Change username</label>
                 <input id="usernameInput" type="text" name="username" placeholder="Username">
             </p>
             <p>
@@ -48,6 +47,10 @@
             </p>
         </fieldset>
     </form>
+    -->
 </div>
+<?php
+include 'components/footer.php';
+?>
 </body>
 </html>

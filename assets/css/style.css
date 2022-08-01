@@ -26,14 +26,15 @@ body.dark {
     --color-darkGrey: #777;
 }
 
-.nav{
+.nav {
     margin-top: 10px;
 }
 
-.spacer{
+.spacer {
     padding-top: 50px
 }
-.hero-header{
+
+.hero-header {
     color: var(--color-primary);
 }
 
@@ -41,4 +42,31 @@ body.dark {
     .button.outline.primary {
         margin-top: 2rem;
     }
+}
+.noteCardInput {
+    border-color: var(--bg-color) !important;
+    resize: none;
+}
+
+.textfield {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+.noteSelector {
+    margin-left: 2rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: max-content;
+}
+.active-noteSelector{
+    margin-left: 2rem;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: max-content;
 }
