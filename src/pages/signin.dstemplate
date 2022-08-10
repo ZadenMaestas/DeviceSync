@@ -1,13 +1,9 @@
-<?php
-if (isset($_POST["username"]) and isset($_POST["password"])) {
-    $_GET['mode'] = "signin";
-    include "accountDB.php";
-}
-?>
-
-
-<form action="myAccount.php" method="post">
-    <fieldset id="signInForm">
+# Nav
+<a href="/">Home</a>
+<a class="active" href="/account">Account</a>
+# Body
+<form id="signInForm">
+    <fieldset>
         <legend>Sign In</legend>
         <p>
             <label for="usernameInput">Username</label>
@@ -18,11 +14,6 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
             <input id="passwordInput" type="password" name="password" placeholder="Type your Password">
         </p>
         <p>
-            <script>
-                function togglePasswordVisibility() {
-                    document.getElementById("passwordInput").type === "password" ? document.getElementById("passwordInput").type = "text" : document.getElementById("passwordInput").type = "password"
-                }
-            </script>
             <label for="showPasswordCheckbox"><input onclick="togglePasswordVisibility();" id="showPasswordCheckbox"
                                                      type="checkbox">
                 Show Password </label>
@@ -31,6 +22,6 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
             <button type="submit" class="button primary outline">Submit</button>
         </p>
         <br>
-        <p><a href="myAccount.php?mode=signup">Don't have an account yet? You can create one here.</a></p>
+        <p><a href="/account/signup">Don't have an account? You can sign up here.</a></p>
     </fieldset>
 </form>

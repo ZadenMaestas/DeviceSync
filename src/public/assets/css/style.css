@@ -4,7 +4,7 @@
 :root {
     --bg-color: #ffffff;
     --bg-secondary-color: #f3f3f6;
-    --color-primary: #8807FF;
+    --color-primary: #ae56ff;
     --color-lightGrey: #d2d6dd;
     --color-grey: #747681;
     --color-darkGrey: #3f4144;
@@ -43,6 +43,7 @@ body.dark {
         margin-top: 2rem;
     }
 }
+
 .noteCardInput {
     border-color: var(--bg-color) !important;
     resize: none;
@@ -58,6 +59,7 @@ body.dark {
     background-color: var(--bg-color);
     color: var(--font-color);
 }
+
 .noteSelector {
     margin-left: 2rem;
     border-radius: 5px;
@@ -67,7 +69,8 @@ body.dark {
     padding: 5px;
     width: max-content;
 }
-.active-noteSelector{
+
+.active-noteSelector {
     margin-left: 2rem;
     border-radius: 5px;
     border: 1px solid blueviolet;
@@ -75,4 +78,36 @@ body.dark {
     margin-bottom: 10px;
     padding: 5px;
     width: max-content;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.rounded {
+    border-radius: 30px;
+    font-size: 25px;
+    padding: 5px 10px;
+!important;
+}
+
+footer {
+    padding-top: 20%
+}
+
+pre{
+    border-radius: 12px;
+}
+
+.noteContent{
+    width: auto;
+}
+
+/* Cool CSS Selector that selects elements ending with NoteCardForm in their ID */
+[id$="NoteCardForm"] {
+    background-color: var(--bg-secondary-color);
+    -webkit-box-shadow: none;
+    border-radius: 10px;
+    !important;
 }

@@ -1,0 +1,42 @@
+# Nav
+<a href="/" class="active">Notes</a>
+<a>ToDos</a>
+<a href="/account">Account</a>
+# Body
+<div class="row">
+    <div class="text-center col">
+        <h3 class="hero-header">Notes:</h3>
+        <button onclick="toggleElementVisibility('newNoteCardForm')" class="button rounded primary float-right">+
+        </button>
+    </div>
+    <div class="text-center col">
+        <div id="newNoteCardForm" class="hidden card">
+            <h3 id="currentNoteNameLabel" class="hero-header">New Note</h3>
+            <header>
+                <input class="textfield noteCardInput" placeholder="Title" id="noteTitleInput">
+            </header>
+            <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
+                      id="noteContentInput"></textarea>
+            <footer>
+                <button onclick="saveNote()" class="button primary">Save Note</button>
+                <button onclick="clearDraftedNote();" class="button">Clear Contents</button>
+            </footer>
+        </div>
+        <div id="editNoteCardForm" class="hidden card">
+            <h3 class="hero-header">Edit Note</h3>
+            <header>
+                <input readonly class="textfield noteCardInput" placeholder="Title" id="noteEditTitleInput">
+            </header>
+            <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
+                      id="noteEditContentInput"></textarea>
+            <footer>
+                <button onclick="saveNote()" id="saveNoteEditsButton" class="button primary">Save Note</button>
+                <a onclick="clearContent();" class="button">Clear Contents</a>
+            </footer>
+        </div>
+        <script>
+            getNotes()
+        </script>
+    </div>
+    <div class="col" id="notesViewDiv"></div>
+</div>
