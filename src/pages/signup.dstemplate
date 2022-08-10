@@ -1,0 +1,27 @@
+# Nav
+<a href="/">Home</a>
+<a class="active" href="/account">Account</a>
+# Body
+<form id="signUpForm">
+    <fieldset>
+        <legend>Sign Up</legend>
+        <p>
+            <label for="usernameInput">Username</label>
+            <input id="usernameInput" type="text" name="username" placeholder="Username">
+        </p>
+        <p>
+            <label for="passwordInput">Password</label>
+            <input id="passwordInput" type="password" name="password" placeholder="Type your Password">
+        </p>
+        <p>
+            <label for="showPasswordCheckbox"><input onclick="togglePasswordVisibility();" id="showPasswordCheckbox"
+                                                     type="checkbox">
+                Show Password </label>
+        </p>
+        <p>
+            <button type="submit" class="button primary outline">Submit</button>
+        </p>
+        <br>
+        <p><a href="/account/signin">Already have an account? You can sign in here.</a></p>
+    </fieldset>
+</form>

@@ -1,0 +1,7 @@
+# Node Modules
+src/node_modules
+# IDE Files
+.idea/
+.vscode/
+# Remove development 'users' LevelDB
+src/users

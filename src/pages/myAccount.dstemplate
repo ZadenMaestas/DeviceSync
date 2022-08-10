@@ -1,0 +1,8 @@
+# Nav
+<a href="/">Notes</a>
+<a>ToDos</a>
+<a href="/account" class="active">Account</a>
+# Body
+<h2 style="text-align: center;" class="hero-header">Account Management Portal Coming Soon!</h2>
+<button onclick="deleteAccount()" class="button primary outline">Delete Account</button>
+<!-- TODO: My account management -->

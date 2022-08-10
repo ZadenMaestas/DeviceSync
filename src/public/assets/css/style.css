@@ -1,0 +1,113 @@
+@import url("https://unpkg.com/chota@0.8.0/dist/chota.min.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+:root {
+    --bg-color: #ffffff;
+    --bg-secondary-color: #f3f3f6;
+    --color-primary: #ae56ff;
+    --color-lightGrey: #d2d6dd;
+    --color-grey: #747681;
+    --color-darkGrey: #3f4144;
+    --color-error: #d43939;
+    --color-success: #28bd14;
+    --grid-maxWidth: 120rem;
+    --grid-gutter: 2rem;
+    --font-size: 1.6rem;
+    --font-color: #333333;
+    --font-family-sans: sans-serif;
+    --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+}
+
+body.dark {
+    --bg-color: #181818;
+    --bg-secondary-color: #131316;
+    --font-color: #f5f5f5;
+    --color-grey: #ccc;
+    --color-darkGrey: #777;
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+.spacer {
+    padding-top: 50px
+}
+
+.hero-header {
+    color: var(--color-primary);
+}
+
+@media only screen and (max-width: 480px) {
+    .button.outline.primary {
+        margin-top: 2rem;
+    }
+}
+
+.noteCardInput {
+    border-color: var(--bg-color) !important;
+    resize: none;
+}
+
+.noteCardInput:focus {
+    outline: solid 1px var(--color-primary) !important;
+    resize: none;
+}
+
+
+.textfield {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+.noteSelector {
+    margin-left: 2rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: max-content;
+}
+
+.active-noteSelector {
+    margin-left: 2rem;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: max-content;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.rounded {
+    border-radius: 30px;
+    font-size: 25px;
+    padding: 5px 10px;
+!important;
+}
+
+footer {
+    padding-top: 20%
+}
+
+pre{
+    border-radius: 12px;
+}
+
+.noteContent{
+    width: auto;
+}
+
+/* Cool CSS Selector that selects elements ending with NoteCardForm in their ID */
+[id$="NoteCardForm"] {
+    background-color: var(--bg-secondary-color);
+    -webkit-box-shadow: none;
+    border-radius: 10px;
+    !important;
+}
