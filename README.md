@@ -51,4 +51,4 @@ npm run dev
 
 ## Documentation
 
-### [Current state of API documentation can be found here]()
+### [Current state of API documentation can be found here](https://github.com/ZadenMaestas/DeviceSync/blob/main/docs/documentation.md)
