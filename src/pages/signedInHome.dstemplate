@@ -10,30 +10,34 @@
         </button>
     </div>
     <div class="text-center col">
-        <div id="newNoteCardForm" class="hidden card">
-            <h3 id="currentNoteNameLabel" class="hero-header">New Note</h3>
-            <header>
-                <input class="textfield noteCardInput" placeholder="Title" id="noteTitleInput">
-            </header>
-            <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
-                      id="noteContentInput"></textarea>
-            <footer>
-                <button onclick="saveNote()" class="button primary">Save Note</button>
-                <button onclick="clearDraftedNote();" class="button">Clear Contents</button>
-            </footer>
-        </div>
-        <div id="editNoteCardForm" class="hidden card">
-            <h3 class="hero-header">Edit Note</h3>
-            <header>
-                <input readonly class="textfield noteCardInput" placeholder="Title" id="noteEditTitleInput">
-            </header>
-            <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
-                      id="noteEditContentInput"></textarea>
-            <footer>
-                <button onclick="saveNote()" id="saveNoteEditsButton" class="button primary">Save Note</button>
-                <a onclick="clearContent();" class="button">Clear Contents</a>
-            </footer>
-        </div>
+        <form id="newNoteForm">
+            <div id="newNoteCardForm" class="hidden card">
+                <h3 id="currentNoteNameLabel" class="hero-header">New Note</h3>
+                <header>
+                    <input class="textfield noteCardInput" placeholder="Title" id="noteTitleInput">
+                </header>
+                <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
+                          id="noteContentInput"></textarea>
+                <footer>
+                    <button class="button primary">Save Note</button>
+                    <button onclick="clearDraftedNote();" class="button">Clear Contents</button>
+                </footer>
+            </div>
+        </form>
+        <form id="editNoteForm">
+            <div id="editNoteCardForm" class="hidden card">
+                <h3 class="hero-header">Edit Note</h3>
+                <header>
+                    <input readonly class="textfield noteCardInput" placeholder="Title" id="noteEditTitleInput">
+                </header>
+                <textarea rows="15" class="textfield noteCardInput" placeholder="Content"
+                          id="noteEditContentInput"></textarea>
+                <footer>
+                    <button id="saveNoteEditsButton" class="button primary">Save Note</button>
+                    <a onclick="clearContent();" class="button">Clear Contents</a>
+                </footer>
+            </div>
+        </form>
         <script>
             getNotes()
         </script>

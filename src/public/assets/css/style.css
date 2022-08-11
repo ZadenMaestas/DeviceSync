@@ -101,7 +101,9 @@ pre{
 }
 
 .noteContent{
-    width: auto;
+    width: available;
+    padding: 0;
+    !important;
 }
 
 /* Cool CSS Selector that selects elements ending with NoteCardForm in their ID */

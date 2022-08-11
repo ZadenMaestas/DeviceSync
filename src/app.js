@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 })
 
 
-// /account routing logic
+// Account Page Routing
 app.get('/account', (req, res) => {
     // If logged in send to my account page, otherwise send to signup
     if (req.session["loginSession"]) {
@@ -151,13 +151,14 @@ app.get('/account/delete', async (req, res) => {
 /**
  * Adds new note if signed in and both title and content parameters are included, if not signed in redirects to signin page
  */
-app.get('/account/newNote/:title/:content', async (req, res) => {
+app.post('/account/newNote', async (req, res) => {
     if (req.session["loginSession"]) {
-        const parametersIncluded = req.params.title && req.params.content
+        let postedData = req.body
+        const parametersIncluded = postedData.title && postedData.content
         if (parametersIncluded) {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
-            const note = {Title: req.params.title, Content: req.params.content}
+            const note = {Title: postedData.title, Content: postedData.content}
             let serverResponse = await accountManager.newNote(db, note, username, password)
             res.send(serverResponse)
         } else if (!parametersIncluded) {
@@ -172,17 +173,18 @@ app.get('/account/newNote/:title/:content', async (req, res) => {
 /**
  * Adds new note if signed in and both title and content parameters are included, if not signed in redirects to signin page
  */
-app.get('/account/editNote/:title/:content', async (req, res) => {
+app.post('/account/editNote', async (req, res) => {
     if (req.session["loginSession"]) {
-        const parametersIncluded = req.params.title && req.params.content
+        let postedData = req.body
+        const parametersIncluded = postedData.title && postedData.content
         if (parametersIncluded) {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
-            const note = {Title: req.params.title, Content: req.params.content}
+            const note = {Title: postedData.title, Content: postedData.content}
             let serverResponse = await accountManager.editNote(db, note, username, password)
             res.send(serverResponse)
         } else if (!parametersIncluded) {
-            res.send({"Error": "Note title needs to be specified"})
+            res.send({"Error": "Note title and content need to be specified"})
         }
 
     } else {
@@ -193,13 +195,14 @@ app.get('/account/editNote/:title/:content', async (req, res) => {
 /**
  * Deletes specified note if signed in and title parameter is included, if not signed in redirects to signin page
  */
-app.get('/account/deleteNote/:title', async (req, res) => {
+app.post('/account/deleteNote', async (req, res) => {
     if (req.session["loginSession"]) {
-        const parametersIncluded = req.params.title
+        let postedData = req.body
+        const parametersIncluded = postedData.title
         if (parametersIncluded) {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
-            const note = {Title: req.params.title, Content: req.params.content}
+            const note = {Title: postedData.title}
             let serverResponse = await accountManager.deleteNote(db, note, username, password)
             res.send(serverResponse)
         } else if (!parametersIncluded) {

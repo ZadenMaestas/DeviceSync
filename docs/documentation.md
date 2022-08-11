@@ -26,6 +26,45 @@
 
 ##### Returns: JSON response, and saves session cookie for connected client
 
+<br>
+
+### /account/newNote
+
+##### Parameters (Best to make sure these parameters are URL encoded:
+
+##### title | Title of note
+
+##### content | Content of note
+
+##### Returns: If client requesting this endpoint is logged in then create the note if parameters are included, otherwise redirect to /account/signin
+
+##### Example usage: /account/newNote/MyFirstNote/This%20is%20my%20first%20note
+
+<br>
+
+### /account/editNote
+
+##### Parameters
+
+##### title | Title of note to edit
+
+##### content | Content of note to replace old content with
+
+##### Returns: If client requesting this endpoint is logged in then edit the specified note if parameters are included, otherwise redirect to /account/signin
+
+
+<br>
+
+### /account/deleteNote
+
+##### Parameters
+
+##### title | Title of note to delete
+
+##### Returns: If client requesting this endpoint is logged in then delete the specified note if title is included, otherwise redirect to /account/signin
+
+----
+
 ## GET Endpoints
 
 ### /logout
@@ -42,45 +81,6 @@
 
 ##### Returns: If client requesting this endpoint is logged in then delete the account, otherwise redirect to /account/signin
 
-<br>
-
-### /account/newNote/:title/:content
-
-##### Parameters (Best to make sure these parameters are URL encoded:
-
-##### :title | Swap this out for desired title in the URL
-
-##### :content | Swap this out for desired title in the URL
-
-##### Returns: If client requesting this endpoint is logged in then create the note if parameters are included, otherwise redirect to /account/signin
-
-##### Example usage: /account/newNote/MyFirstNote/This%20is%20my%20first%20note
-
-<br>
-
-### /account/editNote/:title/:content
-
-##### Parameters (Best to make sure these parameters are URL encoded:
-
-##### :title | Swap this out for desired title in the URL
-
-##### :content | Swap this out for desired title in the URL
-
-##### Returns: If client requesting this endpoint is logged in then edit the specified note if parameters are included, otherwise redirect to /account/signin
-
-##### Example usage: /account/editNote/existingNote/This%20is%20my%20first%20note%20edit
-
-<br>
-
-### /account/deleteNote/:title
-
-##### Parameters (Best to make sure these parameters are URL encoded:
-
-##### :title | Swap this out for desired title of note to delete
-
-##### Returns: If client requesting this endpoint is logged in then delete the specified note if title is included, otherwise redirect to /account/signin
-
-##### Example usage: /account/deleteNote/MyTitleOfNote
 
 <br>
 

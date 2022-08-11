@@ -49,21 +49,6 @@ function deleteAccount() {
 
 // Note Functions
 
-async function saveNote() {
-    let title = document.getElementById("noteTitleInput").value
-    let content = document.getElementById("noteContentInput").value
-    title = encodeURI(title)
-    content = encodeURI(content)
-    await fetch(`/account/newNote/${title}/${content}`)
-        .then(response => response.json())
-        .then(response => {
-            alert(response.Error || response.Success)
-            if (response.Success) {
-                window.location.reload()
-            }
-        })
-}
-
 function clearDraftedNote() {
     document.getElementById("noteTitleInput").value = ""
     document.getElementById("noteContentInput").value = ""
@@ -72,7 +57,7 @@ function clearDraftedNote() {
 /**
  * For usage with edit note clear button, only clears the content box
  */
-function clearContent(){
+function clearContent() {
     document.getElementById("noteEditContentInput").value = ""
 }
 
@@ -90,9 +75,8 @@ async function getNotes() {
         .then(response => response.json())
         .then(notes => {
             notes = notes.Notes
-            for (let note in notes) {
-                let noteObj = notes[note]
-                properHTMLInsert("notesViewDiv", newNoteView(noteObj))
+            for (let note of notes) {
+                properHTMLInsert("notesViewDiv", newNoteView(note))
             }
         });
 }
@@ -100,28 +84,23 @@ async function getNotes() {
 async function deleteNote(title) {
     let response = confirm("Are you sure you want to delete this note?");
     if (response) {
-        await fetch(`/account/deleteNote/${title}`)
-            .then(response => response.json())
-            .then(response => {
-                alert(response.Error || response.Success)
-                if (response.Success) {
-                    window.location.reload()
-                }
-            })
-    }
-}
+        let formData = {
+            title: title
+        };
 
-async function saveNoteEdits(title) {
-    // Get the textarea note content
-    let content = document.getElementById("noteEditContentInput").value
-    await fetch(`/account/editNote/${title}/${content}`)
-        .then(response => response.json())
-        .then(response => {
-            alert(response.Error || response.Success)
-            if (response.Success) {
+        $.ajax({
+            type: "POST",
+            url: "/account/deleteNote",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            alert(data.Success || data.Error)
+            if (data.Success) {
                 window.location.reload()
             }
-        })
+        });
+    }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -161,6 +140,50 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/account/signin",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            alert(data.Success || data.Error)
+            if (data.Success) {
+                window.location.href = "/"
+            }
+        });
+
+        event.preventDefault();
+    });
+    // New Note Form Logic On Submit
+    $("#newNoteForm").submit(function (event) {
+        let formData = {
+            title: $("#noteTitleInput").val(),
+            content: $("#noteContentInput").val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/account/newNote",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            alert(data.Success || data.Error)
+            if (data.Success) {
+                window.location.href = "/"
+            }
+        });
+
+        event.preventDefault();
+    });
+    // New Note Form Logic On Submit
+    $("#editNoteForm").submit(function (event) {
+        let formData = {
+            title: $("#noteEditTitleInput").val(),
+            content: $("#noteEditContentInput").val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/account/editNote",
             data: formData,
             dataType: "json",
             encode: true,
