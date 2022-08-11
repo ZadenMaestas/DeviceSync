@@ -1,10 +1,15 @@
 module.exports = {editNote, deleteNote, getNotes, newNote, createUser, getUser, loginUser, deleteUser}
 const bcrypt = require('bcryptjs')
+const {Level} = require('level') // For type inference
+
+////////////////////////////////////////////////////////////////
+////////// Account Management Utility Functions ////////////////
+////////////////////////////////////////////////////////////////
 
 /**
  * Fetches specified user if existing from the DB, otherwise returns null
+ * @param {Level} db LevelDB Instance
  * @param {string} username
- * @param db LevelDB Instance
  */
 async function getUser(db, username) {
     let toReturn
@@ -12,16 +17,17 @@ async function getUser(db, username) {
         .then(user => {
             toReturn = user
         })
-        .catch(error => {
+        .catch(() => {
             toReturn = null
         })
     return toReturn
 }
 
 /**
- * Fetches specified user if existing from the DB, otherwise returns null
- * @param {string} username
- * @param db LevelDB Instance
+ * Deletes specified user from DB if existing and if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {string} username User's username
+ * @param {string} password User's password
  */
 async function deleteUser(db, username, password) {
     const isExistingUser = await getUser(db, username)
@@ -34,10 +40,10 @@ async function deleteUser(db, username, password) {
             let toReturn
             // Remove existing user if password was correct
             await db.del(username)
-                .then(response => {
+                .then(() => {
                     toReturn = `Successfully Deleted ${username}`
                 })
-                .catch(err => {
+                .catch(() => {
                     toReturn = "Database error"
                 })
             return toReturn
@@ -47,6 +53,12 @@ async function deleteUser(db, username, password) {
     }
 }
 
+/**
+ * Fetches specified user if existing from the DB, otherwise returns null
+ * @param {Level} db LevelDB Instance
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function createUser(db, username, password) {
     const isExistingUser = await getUser(db, username)
     if (!isExistingUser) {
@@ -63,6 +75,12 @@ async function createUser(db, username, password) {
     }
 }
 
+/**
+ * Logs in specified user if existing and if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function loginUser(db, username, password) {
     const isExistingUser = await getUser(db, username)
     if (isExistingUser) {
@@ -78,6 +96,19 @@ async function loginUser(db, username, password) {
     }
 }
 
+
+////////////////////////////////////////////////////////////////
+////////// Note Management Utility Functions ////////////////
+////////////////////////////////////////////////////////////////
+
+
+/**
+ * Deletes specified note if existing and if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {Object} note Note object with Title and Content values
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function deleteNote(db, note, username, password) {
     const isExistingUser = await getUser(db, username)
     if (isExistingUser) {
@@ -109,6 +140,13 @@ async function deleteNote(db, note, username, password) {
     }
 }
 
+/**
+ * Edits specified note if existing and if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {Object} note Note object with Title and Content values
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function editNote(db, note, username, password) {
     const isExistingUser = await getUser(db, username)
     if (isExistingUser) {
@@ -140,6 +178,13 @@ async function editNote(db, note, username, password) {
     }
 }
 
+/**
+ * Creates new note if not already existing and if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {Object} note Note object with Title and Content values
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function newNote(db, note, username, password) {
     const isExistingUser = await getUser(db, username)
     if (isExistingUser) {
@@ -151,7 +196,7 @@ async function newNote(db, note, username, password) {
             let existingNotes = isExistingUser.Notes
             let alreadyExisting = false
             for (let iteratedNote in existingNotes) {
-                noteObj = existingNotes[iteratedNote]
+                let noteObj = existingNotes[iteratedNote]
                 if (noteObj.Title === note.Title) {
                     alreadyExisting = true
                 }
@@ -168,6 +213,12 @@ async function newNote(db, note, username, password) {
     }
 }
 
+/**
+ * Gets user notes if auth details are valid
+ * @param {Level} db LevelDB Instance
+ * @param {string} username User's username
+ * @param {string} password User's password
+ */
 async function getNotes(db, username, password) {
     const isExistingUser = await getUser(db, username)
     if (isExistingUser) {

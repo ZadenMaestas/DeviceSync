@@ -24,7 +24,7 @@ liveReloadServer.server.once("connection", () => {
 app.use(connectLiveReload()); // Middleware for livereload
  */
 
-// Required middleware
+// Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
 app.use(cookieSession({
     name: 'session',
@@ -33,11 +33,12 @@ app.use(cookieSession({
     // Cookie Options
     maxAge: 30 * 24 * 60 * 60 * 1000 // 1 Month
 }))
-app.use(express.static('public')) // File serving middleware, routed to src/public
+app.use(express.static('public'))
 
+// Register custom view engine
 app.engine('dstemplate', viewEngine)
-app.set('views', './pages') // specify the views directory
-app.set('view engine', 'dstemplate') // register the template engine
+app.set('views', './pages')
+app.set('view engine', 'dstemplate')
 
 
 const PORT = 3000
@@ -72,6 +73,9 @@ app.get('/account', (req, res) => {
 ///// Account Management Endpoints /////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Register new user if username is not taken, requires username and password on POST
+ */
 app.route("/account/signup")
     .get(async (req, res) => {
         if (req.session["loginSession"]) {
@@ -95,6 +99,9 @@ app.route("/account/signup")
         }
     })
 
+/**
+ * Allows an existing user to sign in, requires username and password on POST
+ */
 app.route("/account/signin")
     .get(async (req, res) => {
         if (req.session["loginSession"]) {
@@ -118,6 +125,9 @@ app.route("/account/signin")
         }
     })
 
+/**
+ * Deletes account if signed in, otherwise redirects to signin page
+ */
 app.get('/account/delete', async (req, res) => {
     if (req.session["loginSession"]) {
         const username = req.session["loginSession"][0]
@@ -134,7 +144,13 @@ app.get('/account/delete', async (req, res) => {
     }
 })
 
-// Note Management
+////////////////////////////////////////////////////////////////
+///// Note Management Endpoints ////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Adds new note if signed in and both title and content parameters are included, if not signed in redirects to signin page
+ */
 app.get('/account/newNote/:title/:content', async (req, res) => {
     if (req.session["loginSession"]) {
         const parametersIncluded = req.params.title && req.params.content
@@ -153,6 +169,9 @@ app.get('/account/newNote/:title/:content', async (req, res) => {
     }
 })
 
+/**
+ * Adds new note if signed in and both title and content parameters are included, if not signed in redirects to signin page
+ */
 app.get('/account/editNote/:title/:content', async (req, res) => {
     if (req.session["loginSession"]) {
         const parametersIncluded = req.params.title && req.params.content
@@ -171,6 +190,9 @@ app.get('/account/editNote/:title/:content', async (req, res) => {
     }
 })
 
+/**
+ * Deletes specified note if signed in and title parameter is included, if not signed in redirects to signin page
+ */
 app.get('/account/deleteNote/:title', async (req, res) => {
     if (req.session["loginSession"]) {
         const parametersIncluded = req.params.title
@@ -189,6 +211,9 @@ app.get('/account/deleteNote/:title', async (req, res) => {
     }
 })
 
+/**
+ * Gets user notes in JSON list dict format if signed in, otherwise redirects to signin page
+ */
 app.get('/account/getNotes', async (req, res) => {
     if (req.session["loginSession"]) {
         const username = req.session["loginSession"][0]
@@ -200,6 +225,9 @@ app.get('/account/getNotes', async (req, res) => {
     }
 })
 
+/**
+ * Invalidates client session (if any) then redirects home
+ */
 app.get("/logout", (req, res) => {
     req.session = null
     res.redirect('/')
@@ -215,7 +243,7 @@ app.get("/logout", (req, res) => {
  */
 app.get('/analytics/hit', async (req, res) => {
     await db.get('hits')
-        .then(async hit => {
+        .then(async () => {
             const previousHits = await db.get('hits')
             const newHits = Number(previousHits) + 1
             await db.put("hits", String(newHits))
@@ -236,7 +264,7 @@ app.get('/analytics/hit', async (req, res) => {
 app.get('/analytics', async (req, res) => {
     let jsonResponse
     await db.get('hits')
-        .then(async hit => {
+        .then(async () => {
             jsonResponse = await db.get('hits')
 
         })

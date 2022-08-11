@@ -1,10 +1,21 @@
 # DeviceSync V2
 
-----------
-
 ## About
 
 **DeviceSync is an open source cross-platform note-taking application under the MIT License**
+
+## Usage | [Application can be found here](https://devicesync.theprotondev.repl.co)
+### Phone Installation:
+**Tap on your browser menu and tap the Add To Homescreen button**
+
+_You can then open DeviceSync from the home screen, and it will look like it's very own app!_
+
+### Computer Usage:
+**You're likely to use the site as usual on PC, but if you'd like browsers like Brave support a similar look to the  PWA on mobile. To achieve this open the browser menu, go to more tools, and click Create Shortcut. This will then open a promp for the shortcut name and give a untoggled option "Open In Window" make sure to toggle that then press add**
+
+_You can then open DeviceSync from the desktop, and it will have its own window separate from your regular browser tabs_
+
+---
 
 ### Why the rewrite?
 
