@@ -19,11 +19,11 @@ _You can then open DeviceSync from the desktop, and it will have its own window 
 **Note: Only works on Linux**
 #### Bash Shell
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh)
+sudo bash <(curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh)
 ```
 #### Fish Shell:
 ```bash
-bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh | psub)
+sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh | psub)
 ```
 
 ---
