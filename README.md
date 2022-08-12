@@ -15,6 +15,17 @@ _You can then open DeviceSync from the home screen, and it will look like it's v
 
 _You can then open DeviceSync from the desktop, and it will have its own window separate from your regular browser tabs_
 
+### If you're a power-user or just like having the power of a Command Line Interface, you're in luck DeviceSync has it's very own CLI written in Python3. To install it follow the instructions below 
+**Note: Only works on Linux**
+#### Bash Shell
+```bash
+bash <(curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh)
+```
+#### Fish Shell:
+```bash
+bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh | psub)
+```
+
 ---
 
 ### Why the rewrite?
