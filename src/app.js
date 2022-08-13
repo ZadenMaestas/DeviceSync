@@ -3,16 +3,18 @@ const app = express()
 const cookieSession = require('cookie-session');
 const {Level} = require('level')
 const db = new Level('users', {valueEncoding: 'json'}) // Connect to database upon server start
-const accountManager = require("./lib/userManager");
 const {viewEngine} = require("./lib/templater"); // Custom view engine that allowed a quite slick SPA-like HTML codebase minification
+const {NoteManager, UserSession} = require("./lib/userManager");
 
 /* Non-production environment code
  * Live Reload Setup, only necessary on development environment
  * DB debugging
  * Comment this out on production versions
-//const {readDB} = require("./lib/debug");
-//readDB(db)
-
+ *
+ * Debugging Code
+ * const {readDB} = require("./lib/debug");
+ * readDB(db)
+ *
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
 const liveReloadServer = livereload.createServer();
@@ -22,7 +24,7 @@ liveReloadServer.server.once("connection", () => {
     }, 100);
 });
 app.use(connectLiveReload()); // Middleware for livereload
- */
+*/
 
 // Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
@@ -87,13 +89,15 @@ app.route("/account/signup")
     .post(async (req, res) => {
         let postedData = req.body
         if (postedData.username && postedData.password) {
-            let serverResponse = await accountManager.createUser(db, postedData.username, postedData.password)
-            if (serverResponse === "User has been created successfully") {
-                req.session["loginSession"] = [postedData.username, postedData.password]
-                res.send({"Success": serverResponse})
-            } else {
-                res.send({"Error": serverResponse})
-            }
+            let userSession = new UserSession(db, postedData.username, postedData.password, "signup")
+            userSession.init().then(sessionResponse => {
+                if (sessionResponse === "User has been created successfully") {
+                    req.session["loginSession"] = [postedData.username, postedData.password]
+                    res.send({"Success": sessionResponse})
+                } else {
+                    res.send({"Error": sessionResponse})
+                }
+            })
         } else {
             res.response.send({"Error": "Please include both a username and password"})
         }
@@ -113,13 +117,15 @@ app.route("/account/signin")
     .post(async (req, res) => {
         let postedData = req.body
         if (postedData.username && postedData.password) {
-            let serverResponse = await accountManager.loginUser(db, postedData.username, postedData.password)
-            if (serverResponse === "Successfully Signed In") {
-                req.session["loginSession"] = [postedData.username, postedData.password]
-                res.send({"Success": serverResponse})
-            } else {
-                res.send({"Error": serverResponse})
-            }
+            let userSession = new UserSession(db, postedData.username, postedData.password, "signin")
+            userSession.init().then(sessionResponse => {
+                if (sessionResponse === "Successfully Signed In") {
+                    req.session["loginSession"] = [postedData.username, postedData.password]
+                    res.send({"Success": sessionResponse})
+                } else {
+                    res.send({"Error": sessionResponse})
+                }
+            })
         } else {
             res.send({"Error": "Please include both a username and password"})
         }
@@ -132,13 +138,18 @@ app.get('/account/delete', async (req, res) => {
     if (req.session["loginSession"]) {
         const username = req.session["loginSession"][0]
         const password = req.session["loginSession"][1]
-        let serverResponse = await accountManager.deleteUser(db, username, password)
-        if (serverResponse.search("Successfully Deleted") !== -1) {
-            req.session = null
-            res.redirect('/')
-        } else {
-            res.status(406).send("Invalid user details")
-        }
+        let userSession = new UserSession(db, username, password, "signin")
+        userSession.init().then(async (sessionResponse) => {
+            if (sessionResponse === "Successfully Signed In") {
+                let serverResponse = await userSession.deleteUser()
+                if (serverResponse.search("Successfully Deleted") !== -1) {
+                    req.session = null
+                    res.redirect('/')
+                }
+            } else {
+                res.status(406).send("Invalid user details")
+            }
+        })
     } else {
         res.redirect('/account/signin')
     }
@@ -158,13 +169,21 @@ app.post('/account/newNote', async (req, res) => {
         if (parametersIncluded) {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
+
             const note = {Title: postedData.title, Content: postedData.content}
-            let serverResponse = await accountManager.newNote(db, note, username, password)
-            res.send(serverResponse)
+
+            let userSession = new UserSession(db, username, password, "signin")
+            userSession.init().then(async (sessionResponse) => {
+                if (sessionResponse === "Successfully Signed In") {
+                    let serverResponse = await new NoteManager(userSession).newNote(note)
+                    res.send(serverResponse)
+                } else {
+                    res.status(406).send("Invalid user details")
+                }
+            })
         } else if (!parametersIncluded) {
             res.send({"Error": "Please include both a title for your note and content"})
         }
-
     } else {
         res.redirect("/account/signin")
     }
@@ -181,8 +200,15 @@ app.post('/account/editNote', async (req, res) => {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
             const note = {Title: postedData.title, Content: postedData.content}
-            let serverResponse = await accountManager.editNote(db, note, username, password)
-            res.send(serverResponse)
+            let userSession = new UserSession(db, username, password, "signin")
+            userSession.init().then(async (sessionResponse) => {
+                if (sessionResponse === "Successfully Signed In") {
+                    let serverResponse = await new NoteManager(userSession).editNote(note)
+                    res.send(serverResponse)
+                } else {
+                    res.status(406).send("Invalid user details")
+                }
+            })
         } else if (!parametersIncluded) {
             res.send({"Error": "Note title and content need to be specified"})
         }
@@ -202,9 +228,15 @@ app.post('/account/deleteNote', async (req, res) => {
         if (parametersIncluded) {
             const username = req.session["loginSession"][0]
             const password = req.session["loginSession"][1]
-            const note = {Title: postedData.title}
-            let serverResponse = await accountManager.deleteNote(db, note, username, password)
-            res.send(serverResponse)
+            let userSession = new UserSession(db, username, password, "signin")
+            userSession.init().then(async (sessionResponse) => {
+                if (sessionResponse === "Successfully Signed In") {
+                    let serverResponse = await new NoteManager(userSession).deleteNote(postedData.title)
+                    res.send(serverResponse)
+                } else {
+                    res.status(406).send("Invalid user details")
+                }
+            })
         } else if (!parametersIncluded) {
             res.send({"Error": "Note title needs to be specified"})
         }
@@ -221,8 +253,15 @@ app.get('/account/getNotes', async (req, res) => {
     if (req.session["loginSession"]) {
         const username = req.session["loginSession"][0]
         const password = req.session["loginSession"][1]
-        let serverResponse = await accountManager.getNotes(db, username, password)
-        res.send(serverResponse)
+        let userSession = new UserSession(db, username, password, "signin")
+        userSession.init().then(async (sessionResponse) => {
+            if (sessionResponse === "Successfully Signed In") {
+                let serverResponse = await new NoteManager(userSession).getNotes()
+                res.send(serverResponse)
+            } else {
+                res.status(406).send("Invalid user details")
+            }
+        })
     } else {
         res.redirect("/account/signin")
     }

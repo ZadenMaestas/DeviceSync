@@ -5,23 +5,33 @@
 **DeviceSync is an open source cross-platform note-taking application under the MIT License**
 
 ## Usage | [Application can be found here](https://devicesync.theprotondev.repl.co)
+
 ### Phone Installation:
+
 **Tap on your browser menu and tap the Add To Homescreen button**
 
 _You can then open DeviceSync from the home screen, and it will look like it's very own app!_
 
 ### Computer Usage:
-**You're likely to use the site as usual on PC, but if you'd like browsers like Brave support a similar look to the  PWA on mobile. To achieve this open the browser menu, go to more tools, and click Create Shortcut. This will then open a promp for the shortcut name and give a untoggled option "Open In Window" make sure to toggle that then press add**
+
+**You're likely to use the site as usual on PC, but if you'd like browsers like Brave support a similar look to the PWA
+on mobile. To achieve this open the browser menu, go to more tools, and click Create Shortcut. This will then open a
+promp for the shortcut name and give a untoggled option "Open In Window" make sure to toggle that then press add**
 
 _You can then open DeviceSync from the desktop, and it will have its own window separate from your regular browser tabs_
 
-### If you're a power-user or just like having the power of a Command Line Interface, you're in luck DeviceSync has it's very own CLI written in Python3. To install it follow the instructions below 
+### If you're a power-user or just like having the power of a Command Line Interface, you're in luck DeviceSync has it's very own CLI written in Python3. To install it follow the instructions below
+
 **Note: Only works on Linux**
+
 #### Bash Shell
+
 ```bash
 sudo bash <(curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh)
 ```
+
 #### Fish Shell:
+
 ```bash
 sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/install-cli.sh | psub)
 ```
@@ -38,8 +48,12 @@ sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/mai
 - Allows the copying of note content, editing of existing notes, and the deletion of existing notes
 - Account system with BCrypt password hashing using LevelDB
 - [Ability to self-host the application ](https://github.com/ZadenMaestas/DeviceSync#self-hosting)
-- **More updates on the way!** Planned features include, ToDos, account portal, custom theming, CLI in Python
-  using Requests module and DeviceSync API
+- **More updates on the way!**
+    - Planned features include
+        - ToDos
+        - User note groups
+        - Account portal
+        - Custom theming
 
 ## Current Tech Stack
 
@@ -48,6 +62,7 @@ sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/mai
         - Production:
             - [Express](https://expressjs.com) | Quite popular web server framework that I wanted to try
             - [LevelDB](https://github.com/Level/level) | Key Value Storage Solution
+            - [BcryptJS](https://github.com/dcodeIO/bcrypt.js#readme) | Used for password hashing
         - Development:
             - [nodemon](https://nodemon.io) | Enables hot reloading for the server which is essential for me personally
             - livereload & connect-livereload | Another layer of adding hot reloading but reloads changes on browser

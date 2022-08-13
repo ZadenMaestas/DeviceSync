@@ -1,6 +1,6 @@
 {
   "name": "devicesync",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "DeviceSync is an open source cross-platform note-taking application under the MIT License",
   "main": "app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "prod": "node app.js"
   },
   "nodemonConfig": {
-    "ext": "js,json,hbs,html,css"
+    "ext": "js,css,dstemplate"
   },
   "keywords": [],
   "author": "Zaden Maestas",
