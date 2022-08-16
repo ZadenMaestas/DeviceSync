@@ -50,7 +50,7 @@ function viewEngine(filePath, options, callback) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DeviceSync</title>
     <!-- Chota CSS Microframework and local stylesheet-->
-    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <link rel="stylesheet" href="/assets/css/chota.min.css">
     <script defer src="/assets/js/darkmode.js"></script> <!-- Dark-Mode Detection Setter -->
     <link rel="stylesheet" href="/assets/css/style.css">
     

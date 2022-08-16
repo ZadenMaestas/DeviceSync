@@ -13,7 +13,7 @@
 <div class="row is-center">
     <div class="text-center col-4">
         <form id="newNoteForm">
-            <div id="newNoteCardForm" class="hidden card">
+            <div id="newNoteCardForm" class="is-hidden card">
                 <h3 id="currentNoteNameLabel" class="hero-header">New Note</h3>
                 <header>
                     <input class="textfield noteCardInput" placeholder="Title" id="noteTitleInput">
@@ -27,7 +27,7 @@
             </div>
         </form>
         <form id="editNoteForm">
-            <div id="editNoteCardForm" class="hidden card">
+            <div id="editNoteCardForm" class="is-hidden card">
                 <h3 class="hero-header">Edit Note</h3>
                 <header>
                     <input readonly class="textfield noteCardInput" placeholder="Title" id="noteEditTitleInput">

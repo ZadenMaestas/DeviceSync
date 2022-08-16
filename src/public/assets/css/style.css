@@ -80,11 +80,6 @@ body.dark {
     width: max-content;
 }
 
-.hidden {
-    display: none;
-    visibility: hidden;
-}
-
 .rounded {
     border-radius: 30px;
     font-size: 25px;
