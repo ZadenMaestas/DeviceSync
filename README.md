@@ -47,6 +47,7 @@ sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/mai
 - Note system with CRUD support (create, read, update, delete)
 - Allows the copying of note content, editing of existing notes, and the deletion of existing notes
 - Account system with BCrypt password hashing using LevelDB
+- CLI Available For Linux | [Click Here To Learn More](https://github.com/ZadenMaestas/DeviceSync#if-youre-a-power-user-or-just-like-having-the-power-of-a-command-line-interface-youre-in-luck-devicesync-has-its-very-own-cli-written-in-python3-to-install-it-follow-the-instructions-below)
 - [Ability to self-host the application ](https://github.com/ZadenMaestas/DeviceSync#self-hosting)
 - **More updates on the way!**
     - Planned features include
