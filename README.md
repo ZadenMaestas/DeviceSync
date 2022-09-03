@@ -49,12 +49,12 @@ sudo bash (curl -s https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/mai
 - Account system with BCrypt password hashing using LevelDB
 - CLI Available For Linux | [Click Here To Learn More](https://github.com/ZadenMaestas/DeviceSync#if-youre-a-power-user-or-just-like-having-the-power-of-a-command-line-interface-youre-in-luck-devicesync-has-its-very-own-cli-written-in-python3-to-install-it-follow-the-instructions-below)
 - [Ability to self-host the application ](https://github.com/ZadenMaestas/DeviceSync#self-hosting)
+- Custom UI theming
 - **More updates on the way!**
     - Planned features include
         - ToDos
         - User note groups
         - Account portal
-        - Custom theming
 
 ## Current Tech Stack
 

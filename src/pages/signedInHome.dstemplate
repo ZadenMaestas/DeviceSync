@@ -48,3 +48,6 @@
     </script>
     <div class="col-6" id="notesViewDiv"></div>
 </div>
+<script defer>
+    getThemeIfAny()
+</script>

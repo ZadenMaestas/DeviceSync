@@ -12,9 +12,7 @@ const {NoteManager, UserSession} = require("./lib/userManager");
  * Comment this out on production versions
  *
  * Debugging Code
- * const {readDB} = require("./lib/debug");
- * readDB(db)
- *
+ * const {readDB} = require("./lib/debug"); readDB(db)
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
 const liveReloadServer = livereload.createServer();
@@ -24,7 +22,7 @@ liveReloadServer.server.once("connection", () => {
     }, 100);
 });
 app.use(connectLiveReload()); // Middleware for livereload
-*/
+ */
 
 // Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
@@ -267,6 +265,39 @@ app.get('/account/getNotes', async (req, res) => {
     }
 })
 
+app.post('/account/theme/set', async (req, res) => {
+    if (req.session["loginSession"]) {
+        let postedData = req.body
+        let theme = postedData.theme
+        const username = req.session["loginSession"][0]
+        const password = req.session["loginSession"][1]
+        let userSession = new UserSession(db, username, password, "signin")
+        let userInfo = await userSession.getUser()
+        userInfo.Theme = theme
+        await db.put(username, userInfo)
+        res.send({"Success": "Theme has been set successfully"})
+    } else {
+        res.redirect("/account/signin")
+    }
+})
+
+app.get('/account/theme/get', async (req, res) => {
+    if (req.session["loginSession"]) {
+        const username = req.session["loginSession"][0]
+        const password = req.session["loginSession"][1]
+        let userSession = new UserSession(db, username, password, "signin")
+        let userInfo = await userSession.getUser()
+        if (!userInfo.Theme){
+            res.send({"Error": "No theme is set"})
+        }
+        else{
+            res.send({"Theme": userInfo.Theme})
+        }
+    } else {
+        res.redirect("/account/signin")
+    }
+})
+
 /**
  * Invalidates client session (if any) then redirects home
  */
@@ -317,7 +348,6 @@ app.get('/analytics', async (req, res) => {
         });
     res.send({"Hits": jsonResponse})
 })
-
 
 // Start Server
 app.listen(PORT, async () => {

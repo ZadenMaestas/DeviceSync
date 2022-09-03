@@ -8,7 +8,7 @@ import sys
 
 USERNAME = os.getlogin()  # Fetch username of logged-in user
 DEVICESYNC_URL = "https://devicesync.theprotondev.repl.co"
-
+DEVICESYNC_VERSION = "V0.0.2"
 
 def read_text_file(filename):
     try:
@@ -73,6 +73,15 @@ def get_notes():
             for note in response["Notes"]:
                 print(f"{iteration}. {note['Title']}")
                 iteration += 1
+            # Once done with the loop ask for input
+            selected = int(input("Enter the number of the note you want to read or press enter to leave the menu\n> "))
+            if selected != "":
+                iteration = 1
+                for note in response["Notes"]:
+                    if iteration == selected:
+                        print(note["Content"])
+                        break
+                    iteration += 1
     except KeyError:
         print(response["Error"])
 
@@ -159,6 +168,8 @@ def main():
         help_msg = """DeviceSync CLI By Zaden Maestas
 
 -- Available Commands --
+    usage: ds-cli <command_category> <subcommand_if_any>
+    
     notes
         notes get | Gets a list of your existing note titles
         notes new <title> <file to fetch contents of>
@@ -168,6 +179,9 @@ def main():
         auth login
         auth signup
         auth logout
+    
+    update
+    version
     """
         args = sys.argv
         if len(args) == 1:
@@ -204,6 +218,23 @@ def main():
                             edit_note(args)
                     except IndexError:
                         print(help_msg)
+            elif args[1] == "version":
+                print(f"You are running DeviceSync CLI {DEVICESYNC_VERSION}")
+            elif args[1] == "update":
+                os.system("""CURRENT_VERSION=$(ds-cli version)
+curl -o latest_cli https://raw.githubusercontent.com/ZadenMaestas/DeviceSync/main/bin/ds-cli.py
+LATEST_VERSION=$(python latest_cli version)
+if [ "$LATEST_VERSION" == "$CURRENT_VERSION" ]
+then
+  echo "You are on the latest version of DeviceSync CLI"
+  rm latest_cli
+else
+  echo "You are using an outdated version of DeviceSync CLI"
+  echo "Updating to the latest version of DeviceSync CLI"
+  echo "Attemping to run 'sudo mv latest_cli /usr/bin/ds-cli' please grant sudo access below."
+  sudo mv latest_cli /usr/bin/ds-cli
+  sudo chmod +x /usr/bin/ds-cli
+fi""")
             else:
                 print(help_msg)
     elif platform.system() != "Linux":

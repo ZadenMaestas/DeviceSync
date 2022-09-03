@@ -6,12 +6,12 @@
 <div class="row is-center">
     <h2 class="text-primary is-center">Account Management Portal</h2>
 </div>
-<!-- Disabled theme system prototype
+<!-- Disabled theme system prototype -->
 <div class="row is-center">
     <button onclick="themeCreator()" class="button primary outline">Set Theme</button>
 </div>
 <div id="themingDiv" class="row is-center">
-    <div id="themeEditor">
+    <div class="is-hidden" id="themeEditor">
         <div class="text-primary row is-center">
             <h2>Create a theme</h2>
         </div>
@@ -19,66 +19,48 @@
             <h5><a href="https://duckduckgo.com/?q=color+picker&ia=answer" target="_blank">Tip: Click here to use a color picker</a></h5>
         </div>
         <div class="row is-center">
-            <script defer>
-                // Get the root element
-                let rootElement = document.querySelector(':root');
-
-                // Create a function for getting a variable value
-                function getCSSVar(varName) {
-                    // Get the styles (properties and values) for the root
-                    let rootStyle = getComputedStyle(rootElement);
-                    // Alert the value of the --blue variable
-                    alert(`The value of --${varName} is: ` + rootStyle.getPropertyValue(`--${varName}`));
-                }
-
-                // Create a function for setting a variable value
-                function setCSSVar(varName, value) {
-                    rootElement.style.setProperty(`--${varName}`, value);
-                }
-
-                function parseColor(cssVariable){
-                    const hexRegexCheck = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                    const rgbRegexCheck = "^\\d{1,3},\\d{1,3},\\d{1,3}$\n"
-
-                    let colorChosen = document.getElementById(`${cssVariable}ColorInput`).value
-                    // If HEX value was specified parse as such
-                    if (colorChosen.match(hexRegexCheck)){
-                        console.log("HEX Detected: "+colorChosen)
-                        setCSSVar(cssVariable, colorChosen)
-                    } else if (colorChosen.match(rgbRegexCheck)){
-                        console.log("RGB Detected: "+colorChosen)
-                        setCSSVar(cssVariable, "rgb(colorChosen)")
-                    } else{ // If invalid color was specified
-                        alert(`Invalid color was specified in ${cssVariable}ColorInput.`);
-                    }
-                }
-
-                function previewThemeChanges(){
-                    parseColor('primary')
-                    parseColor('secondary')
-                }
-
-            </script>
             <form id="themeCreatorForm">
                 <label>Primary Color
-                    <input id="primaryColorInput" placeholder="RGB Or HEX Value" onchange="">
+                    <input id="primaryColorInput" placeholder="RGB Or HEX Value">
                 </label>
                 <label>Secondary Color
-                    <input id="secondaryColorInput" placeholder="RGB Or HEX Value" oninput="">
+                    <input id="secondaryColorInput" placeholder="RGB Or HEX Value">
                 </label>
                 <label>Toggle Dark Mode
-                    <input type="checkbox">
+                     <input id="isDarkmode" type="checkbox">
                 </label>
                 <br>
-                <button onclick="previewThemeChanges()" class="button primary">Preview changes</button>
-                <button class="button primary">Save changes</button>
+                <button type="button" onclick="previewThemeChanges()" class="button primary">Preview changes</button>
+                <button type="submit" class="button primary">Save changes</button>
             </form>
         </div>
     </div>
+    <script defer>
+        fetch("account/theme/get")
+            .then(response => response.json())
+            .then(json => {
+                let theme = json.Theme
+                if (theme){
+                    document.getElementById("primaryColorInput").value = theme.primaryColor
+                    document.getElementById("secondaryColorInput").value = theme.secondaryColor
+                    document.getElementById("isDarkmode").checked = theme.darkMode
+                } else{
+                    let primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
+                    let secondary = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary-color');
+                    let isDarkmode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                    document.getElementById("primaryColorInput").value = primary.trim()
+                    isDarkmode ? document.getElementById("secondaryColorInput").value = "#131316": document.getElementById("secondaryColorInput").value = secondary.trim()
+                    document.getElementById("isDarkmode").checked = isDarkmode
+                }
+            })
+    </script>
 </div>
 <div class="spacer"></div>
--->
+
 <div class="row is-center">
     <button onclick="deleteAccount()" class="button primary outline">Delete Account</button>
 </div>
+<script defer>
+    getThemeIfAny()
+</script>
 <!-- TODO: My account management -->

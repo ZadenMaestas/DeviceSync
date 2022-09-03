@@ -1,6 +1,63 @@
 ////////////////////////////////////////////////////////////////
+// Theming Functions //////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+async function getThemeIfAny(){
+    fetch("account/theme/get")
+        .then(response => response.json())
+        .then(json => {
+            parseTheme(json.Theme)
+        })
+}
+
+function parseTheme(theme){
+    setCSSVar("color-primary", theme.primaryColor)
+    setCSSVar("bg-secondary-color", theme.secondaryColor)
+    theme.darkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark")
+}
+
+function setCSSVar(varName, value) {
+    document.body.style.setProperty(`--${varName}`, value);
+}
+
+function parseColor(cssVariable){
+    const hexRegexCheck = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    const rgbRegexCheck = "^\\d{1,3},\\d{1,3},\\d{1,3}$"
+    const otherRgbRegexCheck = "^\\d{1,3}, \\d{1,3}, \\d{1,3}$"
+
+    let colorChosen = document.getElementById(`${cssVariable}ColorInput`).value
+    // If HEX value was specified parse as such
+    if (colorChosen.match(hexRegexCheck)){
+        console.log("HEX Detected: "+colorChosen)
+        if (cssVariable === "primary") cssVariable = "color-primary"
+        if (cssVariable === "secondary") cssVariable = "bg-secondary-color"
+        setCSSVar(cssVariable, colorChosen)
+        return colorChosen
+    } else if (colorChosen.match(rgbRegexCheck) || colorChosen.match(otherRgbRegexCheck)){
+        console.log("RGB Detected: "+colorChosen)
+        if (cssVariable === "primary") cssVariable = "color-primary"
+        if (cssVariable === "secondary") cssVariable = "bg-secondary-color"
+        setCSSVar(cssVariable, `rgb(${colorChosen})`)
+        return `rgb(${colorChosen})`
+    } else{ // If invalid color was specified
+        alert(`Invalid color was specified in ${cssVariable}ColorInput.`);
+    }
+}
+
+function previewThemeChanges(){
+    let primaryColor = parseColor('primary')
+    let secondaryColor = parseColor('secondary')
+    let darkMode = document.getElementById("isDarkmode").checked
+    document.getElementById("isDarkmode").checked ? document.body.classList.add("dark") : document.body.classList.remove("dark")
+    const theme = {"primaryColor": primaryColor, "secondaryColor": secondaryColor, "darkMode": darkMode}
+    console.log(theme)
+}
+
+////////////////////////////////////////////////////////////////
 // Utility Functions ///////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
+
+
 function copyNoteContents(elementID) {
     let textToCopy = document.getElementById(elementID).value;
     ClipboardJS.copy(textToCopy)
@@ -8,10 +65,20 @@ function copyNoteContents(elementID) {
 }
 
 function editNote(noteTitle) {
-    toggleElementVisibility('editNoteCardForm')
+    let toToggle = true
+    // If the text box is already visible, check if this was from a previous note being edited or if the edit button
+    // should act as normal upon click
+    if (!document.getElementById("editNoteCardForm").classList.contains("is-hidden")){
+        if (document.getElementById("saveNoteEditsButton").onclick.toString().search(`"${noteTitle}"`) === -1){
+            // If the edit card was toggled from a previous note don't hide it
+            toToggle = false
+        }
+    }
+    if (toToggle) toggleElementVisibility('editNoteCardForm')
     document.getElementById("noteEditTitleInput").value = noteTitle
     document.getElementById("noteEditContentInput").value = document.getElementById(`${noteTitle}ContentBox`).value
     document.getElementById("saveNoteEditsButton").setAttribute("onclick", `saveNoteEdits("${noteTitle}")`)
+    document.getElementById("noteEditContentInput").focus()
 }
 
 function properHTMLInsert(id, element) {
@@ -201,6 +268,30 @@ $(document).ready(function () {
     });
     // Prevent default on theme editor form submit
     $('#themeCreatorForm').submit(function(event) {
+        let primaryColor = parseColor('primary')
+        let secondaryColor = parseColor('secondary')
+        if (primaryColor && secondaryColor) {
+            document.getElementById("isDarkmode").checked ? document.body.classList.add("dark") : document.body.classList.remove("dark")
+            let darkMode = document.getElementById("isDarkmode").checked
+            const theme = {"primaryColor": primaryColor, "secondaryColor": secondaryColor, "darkMode": darkMode}
+            let formData = {
+                theme: theme,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/account/theme/set",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                alert(data.Success || data.Error)
+                if (data.Success) {
+                    window.location.href = "/"
+                }
+            });
+        }
+
         event.preventDefault();
     });
 });
