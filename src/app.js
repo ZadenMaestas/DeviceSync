@@ -13,8 +13,8 @@ const {NoteManager} = require("./lib/noteManager");
  * Comment this out on production versions
  *
  * Debugging Code
- *
- */
+ * const {readDB} = require("./lib/debug"); readDB(db)
+
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
 const liveReloadServer = livereload.createServer();
@@ -24,6 +24,7 @@ liveReloadServer.server.once("connection", () => {
     }, 100);
 });
 app.use(connectLiveReload()); // Middleware for livereload
+ */
 
 // Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
@@ -371,6 +372,5 @@ app.get('/analytics', async (req, res) => {
 
 // Start Server
 app.listen(PORT, async () => {
-    const {readDB} = require("./lib/debug"); readDB(db)
     console.log(`DeviceSync Listening For Connections At: http://localhost:${PORT}`)
 })
