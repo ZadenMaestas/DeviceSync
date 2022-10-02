@@ -6,7 +6,6 @@
 <div class="row is-center">
     <h2 class="text-primary is-center">Account Management Portal</h2>
 </div>
-<!-- Disabled theme system prototype -->
 <div class="row is-center">
     <button onclick="themeCreator()" class="button primary outline">Set Theme</button>
 </div>
@@ -22,9 +21,6 @@
             <form id="themeCreatorForm">
                 <label>Primary Color
                     <input id="primaryColorInput" placeholder="RGB Or HEX Value">
-                </label>
-                <label>Secondary Color
-                    <input id="secondaryColorInput" placeholder="RGB Or HEX Value">
                 </label>
                 <label>Toggle Dark Mode
                      <input id="isDarkmode" type="checkbox">
@@ -42,12 +38,11 @@
                 let theme = json.Theme
                 if (theme){
                     document.getElementById("primaryColorInput").value = theme.primaryColor
-                    document.getElementById("secondaryColorInput").value = theme.secondaryColor
-                    document.getElementById("isDarkmode").checked = theme.darkMode
+                    document.getElementById("isDarkmode").checked = theme.darkMode === "true"
                 } else{
                     let primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
                     let secondary = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary-color');
-                    let isDarkmode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                    let isDarkmode = window.matchMedia('(prefers-color-scheme: dark)').matches
                     document.getElementById("primaryColorInput").value = primary.trim()
                     isDarkmode ? document.getElementById("secondaryColorInput").value = "#131316": document.getElementById("secondaryColorInput").value = secondary.trim()
                     document.getElementById("isDarkmode").checked = isDarkmode
@@ -57,6 +52,10 @@
 </div>
 <div class="spacer"></div>
 
+<div class="row is-center">
+    <button onclick="resetThemeToDefault()" class="button primary outline">Reset Theme To Default</button>
+</div>
+<div class="spacer"></div>
 <div class="row is-center">
     <button onclick="deleteAccount()" class="button primary outline">Delete Account</button>
 </div>

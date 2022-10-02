@@ -4,7 +4,8 @@ const cookieSession = require('cookie-session');
 const {Level} = require('level')
 const db = new Level('users', {valueEncoding: 'json'}) // Connect to database upon server start
 const {viewEngine} = require("./lib/templater"); // Custom view engine that allowed a quite slick SPA-like HTML codebase minification
-const {NoteManager, UserSession} = require("./lib/userManager");
+const {UserSession} = require("./lib/userSession");
+const {NoteManager} = require("./lib/noteManager");
 
 /* Non-production environment code
  * Live Reload Setup, only necessary on development environment
@@ -12,7 +13,8 @@ const {NoteManager, UserSession} = require("./lib/userManager");
  * Comment this out on production versions
  *
  * Debugging Code
- * const {readDB} = require("./lib/debug"); readDB(db)
+ *
+ */
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
 const liveReloadServer = livereload.createServer();
@@ -22,7 +24,6 @@ liveReloadServer.server.once("connection", () => {
     }, 100);
 });
 app.use(connectLiveReload()); // Middleware for livereload
- */
 
 // Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
@@ -298,6 +299,25 @@ app.get('/account/theme/get', async (req, res) => {
     }
 })
 
+app.get('/account/theme/reset', async (req, res) => {
+    if (req.session["loginSession"]) {
+        const username = req.session["loginSession"][0]
+        const password = req.session["loginSession"][1]
+        let userSession = new UserSession(db, username, password, "signin")
+        let userInfo = await userSession.getUser()
+        if (!userInfo.Theme){
+            res.send({"Error": "No theme is set"})
+        }
+        else{
+            delete userInfo.Theme
+            await db.put(username, userInfo)
+            res.send({"Success": "Theme has successfully been reset to default"})
+        }
+    } else {
+        res.redirect("/account/signin")
+    }
+})
+
 /**
  * Invalidates client session (if any) then redirects home
  */
@@ -351,5 +371,6 @@ app.get('/analytics', async (req, res) => {
 
 // Start Server
 app.listen(PORT, async () => {
+    const {readDB} = require("./lib/debug"); readDB(db)
     console.log(`DeviceSync Listening For Connections At: http://localhost:${PORT}`)
 })

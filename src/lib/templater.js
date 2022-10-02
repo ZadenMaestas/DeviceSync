@@ -58,6 +58,9 @@ function viewEngine(filePath, options, callback) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/formHandling.js"></script>
+    <script src="/assets/js/theming.js"></script>
+    <script src="/assets/js/noteManagement.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
     <!-- SEO Tags-->
     <meta name="title" content="DeviceSync">
@@ -101,8 +104,8 @@ ${head}
     <div class="spacer"></div>
     ${body}
     <footer class="text-center">
-        <p><a href="https://github.com/ZadenMaestas/DeviceSync"><i class="bi bi-github"></i> Source Code</a> • <a
-                href="https://github.com/ZadenMaestas/DeviceSync/issues/new"><i
+        <p><a href="https://github.com/ZadenMaestas/DeviceSync" target="_blank"><i class="bi bi-github"></i> Source Code</a> • <a
+                href="https://github.com/ZadenMaestas/DeviceSync/issues/new" target="_blank"><i
                 class="bi bi-bug-fill"></i> Report an issue</a> • <a href="https://ko-fi.com/zadenmaestas"
                                                                      target="_blank">🎗
             Donate</a></p>

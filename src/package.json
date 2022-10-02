@@ -1,6 +1,6 @@
 {
   "name": "devicesync",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "DeviceSync is an open source cross-platform note-taking application under the MIT License",
   "main": "app.js",
   "scripts": {
