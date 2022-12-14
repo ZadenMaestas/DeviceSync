@@ -35,7 +35,7 @@ function clearContent() {
 
 function newNoteView(noteObj) {
     let textBoxRowsNeeded = noteObj.Content.split("\n").length + 2
-    return `<pre><h4 class="text-center text-primary">${noteObj.Title}</h4><details><summary>View Content</summary><textarea readonly rows="${textBoxRowsNeeded}" class="noteContent textfield noteCardInput" id="${noteObj.Title}ContentBox">${noteObj.Content}</textarea></details>
+    return `<pre><input id="${noteObj.Title}Checkbox" onclick="updateNoteSelection()" type="checkbox"><h4 class="text-center text-primary">${noteObj.Title}</h4><details><summary>View Content</summary><textarea readonly rows="${textBoxRowsNeeded}" class="noteContent textfield noteCardInput" id="${noteObj.Title}ContentBox">${noteObj.Content}</textarea></details>
     <div class="col is-horizontal-align">
     <button onclick='deleteNote("${noteObj.Title}")' class="button primary"><i class="bi bi-trash"></i></button>
     <button onclick='copyNoteContents("${noteObj.Title}ContentBox")' class="button primary"><i class="bi bi-clipboard"></i></button><button
@@ -73,4 +73,29 @@ async function deleteNote(title) {
             }
         });
     }
+}
+
+function updateNoteSelection(){
+    // Get state of all checkboxes for notes and store to 'noteSelections' object
+    let noteSelections = {}
+    for (const element of document.getElementById("notesViewDiv").children){
+        let parsedNoteCheckedData = parseNoteView(element) // Contains ID of checkbox and value of checked in an array
+        noteSelections[parsedNoteCheckedData[0]] = parsedNoteCheckedData[1]
+    }
+
+    let enableButton = false
+    // Iterate through noteSelections, if at least one was true enable to 'delete selected' button, otherwise disable it
+    for (const property in noteSelections){
+        if (noteSelections[property]){
+            console.log("YES")
+            enableButton = true
+        }
+    }
+    enableButton ? document.getElementById("deleteSelectedButton").removeAttribute("disabled") :
+        document.getElementById("deleteSelectedButton").setAttribute("disabled", "")
+
+}
+
+function parseNoteView(noteView){
+    return [noteView.getElementsByTagName("input")[0].id, noteView.getElementsByTagName("input")[0].checked]
 }
