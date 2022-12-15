@@ -14,10 +14,10 @@ const {loadNonProdServerConfig} = require("./lib/nonProductionLiveServer");
  */
 
 // Constants
-const DEVELOPMENT = true
+const DEVELOPMENT = false
 const PORT = 3000
 
-if (DEVELOPMENT){
+if (DEVELOPMENT) {
     loadNonProdServerConfig(app)
 }
 
@@ -281,10 +281,9 @@ app.get('/account/theme/get', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        if (!userInfo.Theme){
+        if (!userInfo.Theme) {
             res.send({"Error": "No theme is set"})
-        }
-        else{
+        } else {
             res.send({"Theme": userInfo.Theme})
         }
     } else {
@@ -298,10 +297,9 @@ app.get('/account/theme/reset', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        if (!userInfo.Theme){
+        if (!userInfo.Theme) {
             res.send({"Error": "No theme is set"})
-        }
-        else{
+        } else {
             delete userInfo.Theme
             await db.put(username, userInfo)
             res.send({"Success": "Theme has successfully been reset to default"})
