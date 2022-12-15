@@ -18,6 +18,7 @@ const DEVELOPMENT = false
 const PORT = 3000
 
 if (DEVELOPMENT) {
+    // Setup liveserver and hot reload if in development mode
     loadNonProdServerConfig(app)
 }
 
@@ -31,6 +32,23 @@ app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000 // 1 Month
 }))
 app.use(express.static('public'))
+
+/* This breaks login related code so modification is needed
+// Validate user to ensure no details are doctored.
+app.use((req, res, next) => {
+    if (req.session["loginSession"]) {
+        const username = req.session["loginSession"][0]
+        const password = req.session["loginSession"][1]
+        new UserSession(db, username, password, "signin").getUser().then(userValid => {
+            if (!userValid){
+                req.session = null
+                res.redirect('/')
+            }
+        })
+    }
+    next()
+})
+ */
 
 // Register custom view engine
 app.engine('dstemplate', viewEngine)
@@ -267,7 +285,7 @@ app.post('/account/theme/set', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        userInfo.Theme = theme
+        userInfo["Theme"] = theme
         await db.put(username, userInfo)
         res.send({"Success": "Theme has been set successfully"})
     } else {
@@ -281,10 +299,10 @@ app.get('/account/theme/get', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        if (!userInfo.Theme) {
-            res.send({"Error": "No theme is set"})
-        } else {
+        try {
             res.send({"Theme": userInfo.Theme})
+        } catch {
+            res.send({"Error": "No theme is set"})
         }
     } else {
         res.redirect("/account/signin")

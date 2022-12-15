@@ -141,7 +141,9 @@ async function deleteSelectedNotes() {
                 selectedNotes.push(noteTitle.replace("Checkbox", ""))
             }
         }
+        console.log(selectedNotes)
         for (const noteTitle of selectedNotes) {
+            console.log("Currently on " + noteTitle)
             let formData = {
                 title: noteTitle
             };
@@ -154,6 +156,6 @@ async function deleteSelectedNotes() {
                 encode: true,
             })
         }
-        window.location.reload()
+        //window.location.reload()
     }
 }

@@ -44,7 +44,6 @@
                     let secondary = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary-color');
                     let isDarkmode = window.matchMedia('(prefers-color-scheme: dark)').matches
                     document.getElementById("primaryColorInput").value = primary.trim()
-                    isDarkmode ? document.getElementById("secondaryColorInput").value = "#131316": document.getElementById("secondaryColorInput").value = secondary.trim()
                     document.getElementById("isDarkmode").checked = isDarkmode
                 }
             })
