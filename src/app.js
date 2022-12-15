@@ -6,25 +6,20 @@ const db = new Level('users', {valueEncoding: 'json'}) // Connect to database up
 const {viewEngine} = require("./lib/templater"); // Custom view engine that allowed a quite slick SPA-like HTML codebase minification
 const {UserSession} = require("./lib/userSession");
 const {NoteManager} = require("./lib/noteManager");
+const {loadNonProdServerConfig} = require("./lib/nonProductionLiveServer");
 
 /* Non-production environment code
- * Live Reload Setup, only necessary on development environment
  * DB debugging
- * Comment this out on production versions
- *
- * Debugging Code
  * const {readDB} = require("./lib/debug"); readDB(db)
-
-const livereload = require("livereload");
-const connectLiveReload = require("connect-livereload");
-const liveReloadServer = livereload.createServer();
-liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-        liveReloadServer.refresh("/");
-    }, 100);
-});
-app.use(connectLiveReload()); // Middleware for livereload
  */
+
+// Constants
+const DEVELOPMENT = false
+const PORT = 3000
+
+if (DEVELOPMENT) {
+    loadNonProdServerConfig(app)
+}
 
 // Required middleware: URL Encoding support, File Serving, and Cookie Sessions
 app.use(express.urlencoded({extended: true, limit: '1mb'}))
@@ -41,9 +36,6 @@ app.use(express.static('public'))
 app.engine('dstemplate', viewEngine)
 app.set('views', './pages')
 app.set('view engine', 'dstemplate')
-
-
-const PORT = 3000
 
 ////////////////////////////////////////////////////////////////
 ///// Basic Application Routes /////////////////////////////////
@@ -289,10 +281,9 @@ app.get('/account/theme/get', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        if (!userInfo.Theme){
+        if (!userInfo.Theme) {
             res.send({"Error": "No theme is set"})
-        }
-        else{
+        } else {
             res.send({"Theme": userInfo.Theme})
         }
     } else {
@@ -306,10 +297,9 @@ app.get('/account/theme/reset', async (req, res) => {
         const password = req.session["loginSession"][1]
         let userSession = new UserSession(db, username, password, "signin")
         let userInfo = await userSession.getUser()
-        if (!userInfo.Theme){
+        if (!userInfo.Theme) {
             res.send({"Error": "No theme is set"})
-        }
-        else{
+        } else {
             delete userInfo.Theme
             await db.put(username, userInfo)
             res.send({"Success": "Theme has successfully been reset to default"})
